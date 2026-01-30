@@ -10,16 +10,17 @@ public class Movement : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
-    private Animator animator;
+    public Animator animator;
 
     private float activeSpeed=0f;
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        animator.applyRootMotion = false;
-        Debug.Log("Animator "+animator+" SS");
+        //animator = GetComponentInChildren<Animator>();
+        //animator.applyRootMotion = false;
+        //Debug.Log("Animator "+animator+" SS");
         controller = GetComponent<CharacterController>();
+        Debug.Log("Animator "+animator+" SS   "+controller+" Kontroler");
         Cursor.lockState = CursorLockMode.Locked;
     }
 

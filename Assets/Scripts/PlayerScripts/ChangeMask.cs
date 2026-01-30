@@ -8,12 +8,13 @@ public class ChangeMask : MonoBehaviour
 
     Transform maskPos;
     GameObject currentMask;
-
+    Movement movement;
     bool isChanging;
 
     void Start()
     {
         smoke.Stop();
+        movement=GetComponent<Movement>();
         maskPos = GameObject.Find("Mask").transform;
         Debug.Log($"Maska je {maskPos.name} nadjena");
     }
@@ -42,6 +43,8 @@ public class ChangeMask : MonoBehaviour
             StartCoroutine(ChangeMyMask(3));
         else
             Debug.LogWarning("Unknown mask command: " + command);
+        
+        movement.animator=GetComponentInChildren<Animator>();
     }
 
     IEnumerator ChangeMyMask(int index)
