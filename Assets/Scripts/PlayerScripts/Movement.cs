@@ -80,6 +80,7 @@ public class Movement : MonoBehaviour
 
     void UpdateAnimator()
     {
+        if(animator==null) return;
         float currentSpeed = activeSpeed;
         Debug.Log("Speed   "+currentSpeed);
         animator.SetFloat("speed", currentSpeed);

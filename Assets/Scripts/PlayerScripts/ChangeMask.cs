@@ -4,6 +4,7 @@ using System.Collections;
 public class ChangeMask : MonoBehaviour
 {
     [SerializeField] GameObject[] masks;
+    [SerializeField] GameObject baseMask;
     [SerializeField] ParticleSystem smoke;
 
     Transform maskPos;
@@ -17,6 +18,8 @@ public class ChangeMask : MonoBehaviour
         movement=GetComponent<Movement>();
         maskPos = GameObject.Find("Mask").transform;
         Debug.Log($"Maska je {maskPos.name} nadjena");
+        initializeMask();
+
     }
 
     void Update()
@@ -45,6 +48,13 @@ public class ChangeMask : MonoBehaviour
             Debug.LogWarning("Unknown mask command: " + command);
         
         movement.animator=GetComponentInChildren<Animator>();
+    }
+
+    private void initializeMask()
+    {
+        currentMask = Instantiate(baseMask, maskPos);
+        currentMask.transform.localPosition = Vector3.zero;
+        currentMask.transform.localRotation = Quaternion.identity;
     }
 
     IEnumerator ChangeMyMask(int index)
