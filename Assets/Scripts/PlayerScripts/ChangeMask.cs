@@ -27,6 +27,10 @@ public class ChangeMask : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) StartCoroutine(ChangeMyMask(0));
         if (Input.GetKeyDown(KeyCode.Alpha2)) StartCoroutine(ChangeMyMask(1));
         if (Input.GetKeyDown(KeyCode.Alpha3)) StartCoroutine(ChangeMyMask(2));
+        if (movement.animator == null)
+        {
+            movement.animator=GetComponentInChildren<Animator>();
+        }
     }
 
     // 🔥 OVO ZOVE CHATGPT IZ WEBGL-a
