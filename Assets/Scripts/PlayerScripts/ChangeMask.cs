@@ -11,6 +11,7 @@ public class ChangeMask : MonoBehaviour
     GameObject currentMask;
     Movement movement;
     bool isChanging;
+    PlayerStats playerStats;
 
     void Start()
     {
@@ -19,7 +20,8 @@ public class ChangeMask : MonoBehaviour
         maskPos = GameObject.Find("Mask").transform;
         Debug.Log($"Maska je {maskPos.name} nadjena");
         initializeMask();
-
+        playerStats=GetComponent<PlayerStats>();
+        playerStats.visibilityLevel=0; // Very visible
     }
 
     void Update()
@@ -74,6 +76,8 @@ public class ChangeMask : MonoBehaviour
         if (currentMask != null)
             Destroy(currentMask);
 
+        playerStats.visibilityLevel=index;
+        
         currentMask = Instantiate(masks[index], maskPos);
         currentMask.transform.localPosition = Vector3.zero;
         currentMask.transform.localRotation = Quaternion.identity;

@@ -16,11 +16,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        //animator = GetComponentInChildren<Animator>();
-        //animator.applyRootMotion = false;
-        //Debug.Log("Animator "+animator+" SS");
         controller = GetComponent<CharacterController>();
-        Debug.Log("Animator "+animator+" SS   "+controller+" Kontroler");
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -82,7 +78,6 @@ public class Movement : MonoBehaviour
     {
         if(animator==null) return;
         float currentSpeed = activeSpeed;
-        Debug.Log("Speed   "+currentSpeed);
         animator.SetFloat("speed", currentSpeed);
     }
 }
