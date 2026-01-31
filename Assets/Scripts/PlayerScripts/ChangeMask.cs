@@ -15,7 +15,7 @@ public class ChangeMask : MonoBehaviour
     Transform maskPos;
     GameObject currentMask;
     Movement movement;
-    bool isChanging;
+    public bool isChanging;
     PlayerStats playerStats;
 
     PlayerAnswers anw;
@@ -23,6 +23,9 @@ public class ChangeMask : MonoBehaviour
     int manaLevel=40;
     int maxMana=40;
 
+    [Header("Sounds")]
+    AudioSource source;
+    [SerializeField] AudioClip smokeSound;
     Coroutine manaRoutine;
 
     EnemyController enemy;
@@ -39,6 +42,8 @@ public class ChangeMask : MonoBehaviour
 
         anw=GetComponent<PlayerAnswers>();
         StartCoroutine(decreaseFill());
+
+        source=GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,7 +53,7 @@ public class ChangeMask : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3)) StartCoroutine(ChangeMyMask(2));
         if (Input.GetKeyDown(KeyCode.Alpha4)) StartCoroutine(ChangeMyMask(3));
 
-        //Find enemy which talks with you
+        //Find enemy which talks with youChange
         EnemyController[] enemies = FindObjectsOfType<EnemyController>();
         foreach (EnemyController currEnemy in enemies)
         {
@@ -83,9 +88,7 @@ public class ChangeMask : MonoBehaviour
             StartCoroutine(ChangeMyMask(3));
         else if (command.Contains("kings guard"))
             StartCoroutine(ChangeMyMask(2));}
-        /*else
-                Debug.LogWarning("Unknown mask command: " + command);
-        */
+
         
         if(enemy!=null){
         if(command.Contains("long live"))
@@ -110,6 +113,8 @@ public class ChangeMask : MonoBehaviour
     {
         if (isChanging) yield break;
 
+
+        source.PlayOneShot(smokeSound);
         movement.animator.SetTrigger("change");
 
         if (index < 0 || index >= masks.Length) yield break;

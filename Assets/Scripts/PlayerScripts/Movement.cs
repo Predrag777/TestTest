@@ -14,8 +14,11 @@ public class Movement : MonoBehaviour
 
     private float activeSpeed=0f;
     GameObject enemyAimed;
+    bool isAttacking=false;
+    ChangeMask changeMask;
     void Start()
     {
+        changeMask=GetComponent<ChangeMask>();
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -23,14 +26,16 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetMouseButtonDown(0)))
+        if ((Input.GetMouseButtonDown(0)) && !isAttacking)
         {
+            isAttacking=true;
             animator.SetTrigger("attack");
             if (enemyAimed != null)
             {
                 
                 Invoke("destroyEnemy", 0.5f);
             }
+            Invoke("SS", 3f);
         }
 
         MoveController();
@@ -41,6 +46,11 @@ public class Movement : MonoBehaviour
 
     }
 
+    public void SS()
+    {
+        isAttacking=false;
+    }
+
     void destroyEnemy()
     {
         if(enemyAimed!=null)
@@ -49,6 +59,7 @@ public class Movement : MonoBehaviour
 
     void MoveController()
     {
+        if(changeMask.isChanging) return;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 

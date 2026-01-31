@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public int visibilityLevel;
+    public bool lost=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

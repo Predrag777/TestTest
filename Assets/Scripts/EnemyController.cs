@@ -29,6 +29,9 @@ public class EnemyController : MonoBehaviour
     bool isEscape=false;
 
     PlayerAnswers anw;
+    bool isCombatMode=false;
+    bool isAttacking = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -57,6 +60,8 @@ public class EnemyController : MonoBehaviour
             anw=null;
             sayOnce3=false;
             source.PlayOneShot(audios[1]);///////////////Assassin
+          //   animator.SetTrigger("sword");
+             isCombatMode=true;
         }
 
         
@@ -78,9 +83,21 @@ public class EnemyController : MonoBehaviour
                     anw=null;
                     sayOnce3=false;
                     source.PlayOneShot(audios[1]);///////////////Assassin
+                    isCombatMode=true;
+                    //animator.SetTrigger("sword");
                 }
             }
         }
+        if (isCombatMode && !isAttacking)
+        {
+            isAttacking=true;
+            animator.SetTrigger("sword");
+        }
+    }
+
+    public void resetAttack()
+    {
+        isAttacking=false;
     }
 
 
@@ -117,7 +134,8 @@ public class EnemyController : MonoBehaviour
                         anw=null;
                         sayOnce3=false;
                         source.PlayOneShot(audios[1]);///////////////Assassin
-                
+                        //animator.SetTrigger("sword");
+                        isCombatMode=true;
                     }
                     break;
                 }

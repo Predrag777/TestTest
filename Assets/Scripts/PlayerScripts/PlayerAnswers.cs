@@ -25,10 +25,20 @@ public class PlayerAnswers : MonoBehaviour
         {
             answer="long live to king";
         }
+
+        if(answer!=null && answer.Length > 0)
+        {
+            Invoke("resetAnswer", 0.5f);
+        }
     }
 
     public void gptTranslation(string command)
     {
         answer=command;       
+    }
+
+    void resetAnswer()
+    {
+        answer=null;
     }
 }
