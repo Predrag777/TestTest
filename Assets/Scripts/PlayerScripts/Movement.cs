@@ -67,15 +67,15 @@ public class Movement : MonoBehaviour
             controller.Move(move * speed * Time.deltaTime);
     }
 
+    float yRotation = 0f;
+
     void RotationController()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
 
-        float y = transform.eulerAngles.y;
-        y = Mathf.DeltaAngle(0f, y);         
-        y = Mathf.Clamp(y + mouseX, -60f, 60f);
+        yRotation += mouseX;   
 
-        transform.rotation = Quaternion.Euler(0f, y, 0f);
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 
 
