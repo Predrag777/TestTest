@@ -18,15 +18,17 @@ public class ChangeMask : MonoBehaviour
     bool isChanging;
     PlayerStats playerStats;
 
-
+    PlayerAnswers anw;
     int maskWeight=0;
     int manaLevel=40;
     int maxMana=40;
 
     Coroutine manaRoutine;
 
+    EnemyController enemy;
     void Start()
     {
+
         smoke.Stop();
         movement=GetComponent<Movement>();
         maskPos = GameObject.Find("Mask").transform;
@@ -35,7 +37,7 @@ public class ChangeMask : MonoBehaviour
         playerStats=GetComponent<PlayerStats>();
         playerStats.visibilityLevel=0; // Very visible
 
-
+        anw=GetComponent<PlayerAnswers>();
         StartCoroutine(decreaseFill());
     }
 
@@ -45,6 +47,17 @@ public class ChangeMask : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2)) StartCoroutine(ChangeMyMask(1));
         if (Input.GetKeyDown(KeyCode.Alpha3)) StartCoroutine(ChangeMyMask(2));
         if (Input.GetKeyDown(KeyCode.Alpha4)) StartCoroutine(ChangeMyMask(3));
+
+        //Find enemy which talks with you
+        EnemyController[] enemies = FindObjectsOfType<EnemyController>();
+        foreach (EnemyController currEnemy in enemies)
+        {
+            if (currEnemy.metYou)
+            {
+               enemy=currEnemy;
+            }
+        }
+
 
         if(manaLevel<=0) StartCoroutine(ChangeMyMask(3));
 
@@ -61,18 +74,28 @@ public class ChangeMask : MonoBehaviour
         Debug.Log("GPT Command received: " + command);
 
         command = command.ToLower();
-
+        if(enemy==null){
         if (command.Contains("knight"))
-            StartCoroutine(ChangeMyMask(0));
-        else if (command.Contains("soldier"))
-            StartCoroutine(ChangeMyMask(3));
-        else if (command.Contains("assassin"))
             StartCoroutine(ChangeMyMask(1));
+        else if (command.Contains("soldier"))
+            StartCoroutine(ChangeMyMask(0));
+        else if (command.Contains("assassin"))
+            StartCoroutine(ChangeMyMask(3));
         else if (command.Contains("kings guard"))
-            StartCoroutine(ChangeMyMask(2));
-        else
-            Debug.LogWarning("Unknown mask command: " + command);
+            StartCoroutine(ChangeMyMask(2));}
+        /*else
+                Debug.LogWarning("Unknown mask command: " + command);
+        */
         
+        if(enemy!=null){
+        if(command.Contains("long live"))
+            anw.answer="long live to king";
+        else if(command.Contains("kings guard"))
+            anw.answer="kings guard";
+        else if(command.Contains("kings soldier"))
+            anw.answer="kings soldier";}
+
+
         movement.animator=GetComponentInChildren<Animator>();
     }
 
@@ -120,7 +143,7 @@ public class ChangeMask : MonoBehaviour
     IEnumerator decreaseFill()
     {
         while(true){
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
 
             float delta = (maskWeight == 0) ? 1f : -maskWeight;
 

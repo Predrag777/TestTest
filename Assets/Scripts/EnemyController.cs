@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
     bool sayOnce2=true;
     bool sayOnce3=true;
 
-    bool metYou=false;
+    public bool metYou=false;
     bool isEscape=false;
 
     PlayerAnswers anw;
@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+
         viewRange();
 
         if (targetPlayer != null)
