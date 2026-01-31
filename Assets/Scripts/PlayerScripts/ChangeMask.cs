@@ -115,21 +115,20 @@ public class ChangeMask : MonoBehaviour
 
     IEnumerator decreaseFill()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f); // update svaki frame
 
-            float delta = (maskWeight == 0) ? 1f : -maskWeight;
+        yield return new WaitForSeconds(1f); // update svaki frame
 
-            // skaliraj po vremenu da bude glatko
-            manaLevel += Mathf.RoundToInt(delta * Time.deltaTime * 60f);
+        float delta = (maskWeight == 0) ? 1f : -maskWeight;
 
-            // ograniči manu
-            manaLevel = Mathf.Clamp(manaLevel, 0, maxMana);
+        // skaliraj po vremenu da bude glatko
+        manaLevel += Mathf.RoundToInt(delta * Time.deltaTime * 60f);
 
-            // update UI
-            fill.fillAmount = (float)manaLevel / maxMana;
-        }
+        // ograniči manu
+        manaLevel = Mathf.Clamp(manaLevel, 0, maxMana);
+
+        // update UI
+        fill.fillAmount = (float)manaLevel / maxMana;
+        
     }
 
 

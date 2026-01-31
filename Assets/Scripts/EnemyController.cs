@@ -13,10 +13,17 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     Transform targetPlayer;
 
+
+    [Header("AudioSource")]
+    [SerializeField] AudioClip [] audios; 
+    public bool isAccepted;
+    AudioSource source;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         speed = walkSpeed; // start speed
+        source=GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,6 +40,10 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("Speed", 0f);
         }
     }
+
+    bool sayOnce1=true;
+    bool sayOnce2=true;
+    bool sayOnce3=true;
 
     void viewRange()
     {
@@ -54,10 +65,20 @@ public class EnemyController : MonoBehaviour
                     speed=walkSpeed;
                     targetPlayer = playerStats.transform; // postavi kao cilj
                     Debug.Log("Igrač je vidljiv! Neprijatelj reaguje!");
+                    if (sayOnce1)
+                    {
+                        sayOnce1=false;
+                        source.PlayOneShot(audios[0]);
+                    }
                     break; // možemo prestati tražiti druge igrače
                 }
                 else
                 {
+                    if (sayOnce2)
+                    {
+                        sayOnce2=false;
+                        source.PlayOneShot(audios[2]);
+                    }
                     speed=0f;
                     animator.SetFloat("speed", speed);
                 }
@@ -72,21 +93,40 @@ public class EnemyController : MonoBehaviour
         // Računaj smjer prema igraču samo po XZ ravnini
         Vector3 direction = targetPlayer.position - transform.position;
         direction.y = 0; // ignoriraj Y
+        float distance = direction.magnitude;
+
         direction = direction.normalized;
 
-        if (direction != Vector3.zero)
+        // Postavi speed na 0 ako je blizu, inače koristi normalni speed
+        float currentSpeed = speed;
+
+        if (distance <= 1f)
+            currentSpeed = 0f;          // stani
+        else if (distance < 2f){
+            if (sayOnce3)
+            {
+                sayOnce3=false;
+                source.PlayOneShot(audios[1]);///////////////Assassin
+            }
+            currentSpeed = 0f; }         // ostani stani dok ne pređe 2f
+        // else -> distance >= 2f -> nastavi sa normalnim speed
+
+        // Rotiraj neprijatelja samo ako može da ide
+        if (direction != Vector3.zero && currentSpeed > 0f)
         {
-            // Rotiraj neprijatelja prema igraču (XZ ravnina)
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
 
-        // Pomakni neprijatelja prema igraču po XZ
-        transform.position += direction * speed * Time.deltaTime;
+        // Pomakni neprijatelja
+        transform.position += direction * currentSpeed * Time.deltaTime;
 
         // Animacija
-        animator.SetFloat("speed", speed);
+        animator.SetFloat("speed", currentSpeed);
     }
+
+
+
 
     private void OnDrawGizmosSelected()
     {
