@@ -29,6 +29,7 @@ public class ChangeMask : MonoBehaviour
     Coroutine manaRoutine;
 
     EnemyController enemy;
+    public ParticleSystem prepareTransform; 
     void Start()
     {
 
@@ -73,6 +74,12 @@ public class ChangeMask : MonoBehaviour
 
        
     }
+
+    void preparePowerForTransformation()
+    {
+        prepareTransform.Play();        
+    }
+
 
     public void ExecuteCommand(string command)
     {

@@ -16,8 +16,10 @@ public class Movement : MonoBehaviour
     GameObject enemyAimed;
     bool isAttacking=false;
     ChangeMask changeMask;
+
     void Start()
     {
+        prepareTransform.Stop();
         changeMask=GetComponent<ChangeMask>();
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -145,6 +147,7 @@ public class Movement : MonoBehaviour
         // Nacrtaj wireframe cube
         Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
     }
+
 
 
 }
