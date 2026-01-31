@@ -1,17 +1,29 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ChangeMask : MonoBehaviour
 {
+    [Header("Basic Property")]
     [SerializeField] GameObject[] masks;
     [SerializeField] GameObject baseMask;
     [SerializeField] ParticleSystem smoke;
+
+    [Header("UI Components")]
+    [SerializeField] Image fill;
 
     Transform maskPos;
     GameObject currentMask;
     Movement movement;
     bool isChanging;
     PlayerStats playerStats;
+
+
+    int maskWeight=0;
+    int manaLevel=40;
+    int maxMana=40;
+
+    Coroutine manaRoutine;
 
     void Start()
     {
@@ -29,10 +41,16 @@ public class ChangeMask : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1)) StartCoroutine(ChangeMyMask(0));
         if (Input.GetKeyDown(KeyCode.Alpha2)) StartCoroutine(ChangeMyMask(1));
         if (Input.GetKeyDown(KeyCode.Alpha3)) StartCoroutine(ChangeMyMask(2));
+        if (Input.GetKeyDown(KeyCode.Alpha4)) StartCoroutine(ChangeMyMask(3));
+
+        if(manaLevel<=0) StartCoroutine(ChangeMyMask(3));
+
         if (movement.animator == null)
         {
             movement.animator=GetComponentInChildren<Animator>();
         }
+
+       
     }
 
     // 🔥 OVO ZOVE CHATGPT IZ WEBGL-a
@@ -45,11 +63,11 @@ public class ChangeMask : MonoBehaviour
         if (command.Contains("knight"))
             StartCoroutine(ChangeMyMask(0));
         else if (command.Contains("soldier"))
-            StartCoroutine(ChangeMyMask(1));
-        else if (command.Contains("assassin"))
-            StartCoroutine(ChangeMyMask(2));
-        else if (command.Contains("kings guard"))
             StartCoroutine(ChangeMyMask(3));
+        else if (command.Contains("assassin"))
+            StartCoroutine(ChangeMyMask(1));
+        else if (command.Contains("kings guard"))
+            StartCoroutine(ChangeMyMask(2));
         else
             Debug.LogWarning("Unknown mask command: " + command);
         
@@ -85,7 +103,34 @@ public class ChangeMask : MonoBehaviour
         currentMask.transform.localPosition = Vector3.zero;
         currentMask.transform.localRotation = Quaternion.identity;
 
+        MaskProp prop=currentMask.GetComponent<MaskProp>(); 
+        maskWeight=prop.weight;
+
+        manaRoutine= StartCoroutine(decreaseFill());
+
         smoke.Stop();
         isChanging = false;
     }
+
+
+    IEnumerator decreaseFill()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); // update svaki frame
+
+            float delta = (maskWeight == 0) ? 1f : -maskWeight;
+
+            // skaliraj po vremenu da bude glatko
+            manaLevel += Mathf.RoundToInt(delta * Time.deltaTime * 60f);
+
+            // ograniči manu
+            manaLevel = Mathf.Clamp(manaLevel, 0, maxMana);
+
+            // update UI
+            fill.fillAmount = (float)manaLevel / maxMana;
+        }
+    }
+
+
 }
