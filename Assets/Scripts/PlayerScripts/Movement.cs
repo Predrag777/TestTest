@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     ChangeMask changeMask;
 
     [SerializeField] float rollSpeed = 5f;
-    private bool isRolling = false;
+    public bool isRolling = false;
 
 
     void Start()
@@ -52,7 +52,7 @@ public class Movement : MonoBehaviour
             MoveController(); 
         else
             RollMove(); 
-
+        if(isRolling) return;//Not move unitil finish the rolling
         MoveController();
         //RotationController();
         ApplyGravityAndJump();
@@ -184,7 +184,7 @@ IEnumerator RollRoutine()
     animator.SetTrigger("roll");
 
     AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-    float rollDuration = 2f;
+    float rollDuration = 1f;
 
 
     yield return new WaitForSeconds(rollDuration);

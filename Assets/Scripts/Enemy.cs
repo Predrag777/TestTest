@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
+                if(hit.collider.GetComponent<Movement>().isRolling) return false;
                 if (hit.collider.GetComponent<PlayerStats>().visibilityLevel <= enemyVisionLevel)
                 {
                     Debug.Log("UHVACEN SI");
