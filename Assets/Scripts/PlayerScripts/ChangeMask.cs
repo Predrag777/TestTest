@@ -34,6 +34,9 @@ public class ChangeMask : MonoBehaviour
         initializeMask();
         playerStats=GetComponent<PlayerStats>();
         playerStats.visibilityLevel=0; // Very visible
+
+
+        StartCoroutine(decreaseFill());
     }
 
     void Update()
@@ -53,7 +56,6 @@ public class ChangeMask : MonoBehaviour
        
     }
 
-    // 🔥 OVO ZOVE CHATGPT IZ WEBGL-a
     public void ExecuteCommand(string command)
     {
         Debug.Log("GPT Command received: " + command);
@@ -97,7 +99,9 @@ public class ChangeMask : MonoBehaviour
         if (currentMask != null)
             Destroy(currentMask);
 
-        playerStats.visibilityLevel=index;
+        playerStats.visibilityLevel=index+1;
+        if(index>3)
+            playerStats.visibilityLevel=0;
         
         currentMask = Instantiate(masks[index], maskPos);
         currentMask.transform.localPosition = Vector3.zero;
@@ -106,7 +110,7 @@ public class ChangeMask : MonoBehaviour
         MaskProp prop=currentMask.GetComponent<MaskProp>(); 
         maskWeight=prop.weight;
 
-        manaRoutine= StartCoroutine(decreaseFill());
+        //manaRoutine= StartCoroutine(decreaseFill());
 
         smoke.Stop();
         isChanging = false;
@@ -115,19 +119,17 @@ public class ChangeMask : MonoBehaviour
 
     IEnumerator decreaseFill()
     {
+        while(true){
+            yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(1f); // update svaki frame
+            float delta = (maskWeight == 0) ? 1f : -maskWeight;
 
-        float delta = (maskWeight == 0) ? 1f : -maskWeight;
+            manaLevel += Mathf.RoundToInt(delta * Time.deltaTime * 60f);
 
-        // skaliraj po vremenu da bude glatko
-        manaLevel += Mathf.RoundToInt(delta * Time.deltaTime * 60f);
+            manaLevel = Mathf.Clamp(manaLevel, 0, maxMana);
 
-        // ograniči manu
-        manaLevel = Mathf.Clamp(manaLevel, 0, maxMana);
-
-        // update UI
-        fill.fillAmount = (float)manaLevel / maxMana;
+            fill.fillAmount = (float)manaLevel / maxMana;
+        }
         
     }
 

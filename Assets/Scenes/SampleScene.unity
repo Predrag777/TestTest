@@ -6737,6 +6737,7 @@ GameObject:
   - component: {fileID: 943990138}
   - component: {fileID: 943990137}
   - component: {fileID: 943990139}
+  - component: {fileID: 943990140}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6896,8 +6897,10 @@ MonoBehaviour:
   - {fileID: 1664716938958536706, guid: 6ede4538fed5c34928f323d2b3ca1f60, type: 3}
   - {fileID: 2407984090324352013, guid: c424b0c4eeb746779ad338728b27edf4, type: 3}
   - {fileID: 5098347144858642479, guid: 3a8e6e6c866c7c977ae50128b179094c, type: 3}
+  - {fileID: 1974504924140444270, guid: 7c1add4aee4db53b0805552989b40114, type: 3}
   baseMask: {fileID: 1974504924140444270, guid: 7c1add4aee4db53b0805552989b40114, type: 3}
   smoke: {fileID: 903864494}
+  fill: {fileID: 1068059809}
 --- !u!114 &943990139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6911,6 +6914,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibilityLevel: 0
+--- !u!114 &943990140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943990131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d03c4e879da651387f98e33f4428a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  answer: 
 --- !u!1001 &947701354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12369,7 +12385,7 @@ Transform:
   m_GameObject: {fileID: 1685229814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.93, z: 0}
+  m_LocalPosition: {x: 0, y: -1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14536,7 +14552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.271
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14587,6 +14603,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1205340025445955414, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: audios.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1205340025445955414, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: 'audios.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
+    - target: {fileID: 1205340025445955414, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: 'audios.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
+    - target: {fileID: 1205340025445955414, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: 'audios.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
+    - target: {fileID: 1205340025445955414, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: 'audios.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b4cc2bb42a69d477bcba0c5f205e304, type: 3}
     - target: {fileID: 8586795063785397695, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.45
