@@ -69,12 +69,21 @@ public class Movement : MonoBehaviour
 
         if (inputDirection.magnitude >= 0.1f)
         {
-            Vector3 moveDirection = inputDirection;
+            // Uzimamo pravce kamere
+            Vector3 camForward = Camera.main.transform.forward;
+            Vector3 camRight = Camera.main.transform.right;
+
+            camForward.y = 0f;
+            camRight.y = 0f;
+
+            camForward.Normalize();
+            camRight.Normalize();
+
+            Vector3 moveDirection = camForward * vertical + camRight * horizontal;
 
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
 
-            
             controller.Move(moveDirection * speed * Time.deltaTime);
 
             activeSpeed = speed;
@@ -84,6 +93,7 @@ public class Movement : MonoBehaviour
             activeSpeed = 0f;
         }
     }
+
 
 
     float yRotation = 0f;
