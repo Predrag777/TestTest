@@ -66,6 +66,9 @@ public class ChangeMask : MonoBehaviour
     IEnumerator ChangeMyMask(int index)
     {
         if (isChanging) yield break;
+
+        movement.animator.SetTrigger("change");
+
         if (index < 0 || index >= masks.Length) yield break;
 
         isChanging = true;
