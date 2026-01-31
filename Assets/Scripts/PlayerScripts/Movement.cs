@@ -1,6 +1,6 @@
 
 using UnityEngine;
-
+using System.Collections;
 public class Movement : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
@@ -16,6 +16,10 @@ public class Movement : MonoBehaviour
     GameObject enemyAimed;
     bool isAttacking=false;
     ChangeMask changeMask;
+
+    [SerializeField] float rollSpeed = 5f;
+    private bool isRolling = false;
+
 
     void Start()
     {
@@ -39,6 +43,16 @@ public class Movement : MonoBehaviour
             Invoke("SS", 3f);
         }
 
+        if(Input.GetKeyDown(KeyCode.T) && !isRolling)
+        {
+            StartCoroutine(RollRoutine());
+        }
+
+        if(!isRolling)
+            MoveController(); 
+        else
+            RollMove(); 
+
         MoveController();
         //RotationController();
         ApplyGravityAndJump();
@@ -46,6 +60,9 @@ public class Movement : MonoBehaviour
         enemyAimed=detectEnemy();
 
     }
+
+
+
 
     public void SS()
     {
@@ -144,7 +161,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        return null; // Nema neprijatelja
+        return null; 
     }
 
     private void OnDrawGizmos()
@@ -159,6 +176,35 @@ public class Movement : MonoBehaviour
         Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
     }
 
+
+IEnumerator RollRoutine()
+{
+    isRolling = true;
+
+    animator.SetTrigger("roll");
+
+    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+    float rollDuration = 2f;
+
+
+    yield return new WaitForSeconds(rollDuration);
+
+    isRolling = false;
+}
+
+
+
+    void RollMove()
+    {
+        Vector3 rollDirection = transform.forward;
+
+        rollDirection.y = 0f;
+        rollDirection.Normalize();
+
+        controller.Move(rollDirection * rollSpeed * Time.deltaTime);
+
+        activeSpeed = rollSpeed;
+    }
 
 
 }
