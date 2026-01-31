@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     public Animator animator;
 
     private float activeSpeed=0f;
-
+    GameObject enemyAimed;
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -23,11 +23,28 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
+        if ((Input.GetMouseButtonDown(0)))
+        {
+            animator.SetTrigger("attack");
+            if (enemyAimed != null)
+            {
+                
+                Invoke("destroyEnemy", 0.5f);
+            }
+        }
+
         MoveController();
         RotationController();
         ApplyGravityAndJump();
         UpdateAnimator();
+        enemyAimed=detectEnemy();
 
+    }
+
+    void destroyEnemy()
+    {
+        if(enemyAimed!=null)
+        Destroy(enemyAimed);
     }
 
     void MoveController()
@@ -80,4 +97,43 @@ public class Movement : MonoBehaviour
         float currentSpeed = activeSpeed;
         animator.SetFloat("speed", currentSpeed);
     }
+
+    GameObject detectEnemy()
+    {
+        // Položaj centra kockice 2x2x2 ispred igrača
+        Vector3 boxCenter = transform.position + transform.forward * 1f + Vector3.up; 
+        Vector3 boxHalfExtents = new Vector3(1f, 1f, 1f); // polovina dimenzija (2x2x2)
+        
+        // Rotacija kockice ista kao igrača
+        Quaternion boxRotation = transform.rotation;
+
+        // Dobij sve kolidere u boxu
+        Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, boxRotation);
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                return hit.gameObject;
+            }
+        }
+
+        return null; // Nema neprijatelja
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 boxCenter = transform.position + transform.forward * 1f + Vector3.up ;
+        Vector3 boxHalfExtents = new Vector3(1f, 1f, 1f);
+
+        Gizmos.color = Color.red;
+
+        // Postavimo matricu za rotaciju
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
+
+        // Nacrtaj wireframe cube
+        Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
+    }
+
+
 }
