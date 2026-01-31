@@ -127,51 +127,52 @@ public class EnemyController : MonoBehaviour
 
     void viewRange()
     {
-        // Kreiraj sferu oko neprijatelja
         Collider[] hits = Physics.OverlapSphere(transform.position, viewDistance);
 
-        targetPlayer = null; // reset target prije provjere
+        targetPlayer = null;
 
         foreach (Collider hit in hits)
-        {   
-            anw=hit.GetComponent<PlayerAnswers>();
-            PlayerStats playerStats = hit.GetComponent<PlayerStats>();
-            if (playerStats != null)
-            {
-                int visibility = playerStats.visibilityLevel;
-                Debug.Log("Pronađen igrač! Visibility: " + visibility);
+        {
+            PlayerStats playerStats = hit.GetComponentInParent<PlayerStats>();
+            PlayerAnswers answers = hit.GetComponentInParent<PlayerAnswers>();
 
-                
-                if (visibility <= enemyVisionLevel)
+            if (playerStats == null) continue;
+
+            anw = answers;
+
+            int visibility = playerStats.visibilityLevel;
+            Debug.Log("Pronađen igrač! Visibility: " + visibility);
+
+            if (visibility <= enemyVisionLevel)
+            {
+                speed = walkSpeed;
+                targetPlayer = playerStats.transform;
+
+                if (sayOnce1 && visibility == enemyVisionLevel)
                 {
-                    speed=walkSpeed;
-                    targetPlayer = playerStats.transform; // postavi kao cilj
-                    Debug.Log("Igrač je vidljiv! Neprijatelj reaguje!  "+visibility+"  "+enemyVisionLevel);
-                    if (sayOnce1 && visibility==enemyVisionLevel)
-                    {
-                        sayOnce1=false;
-                        source.PlayOneShot(audios[0]);
-                    }
-                    else if(sayOnce3 && visibility<enemyVisionLevel)
-                    {
-                        anw=null;
-                        sayOnce3=false;
-                        source.PlayOneShot(audios[1]);///////////////Assassin
-                        //animator.SetTrigger("sword");
-                        isCombatMode=true;
-                    }
-                    break;
+                    sayOnce1 = false;
+                    source.PlayOneShot(audios[0]);
                 }
-                else
+                else if (sayOnce3 && visibility < enemyVisionLevel)
                 {
-                    if (sayOnce2)
-                    {
-                        sayOnce2=false;
-                        source.PlayOneShot(audios[2]);
-                    }
-                    speed=0f;
-                    animator.SetFloat("speed", speed);
+                    anw = null;
+                    sayOnce3 = false;
+                    source.PlayOneShot(audios[1]);
+                    isCombatMode = true;
                 }
+
+                break;
+            }
+            else
+            {
+                if (sayOnce2)
+                {
+                    sayOnce2 = false;
+                    source.PlayOneShot(audios[2]);
+                }
+
+                speed = 0f;
+                animator.SetFloat("speed", speed);
             }
         }
     }
@@ -218,41 +219,45 @@ public class EnemyController : MonoBehaviour
     {
         if (targetPlayer == null) return;
 
-        // Računaj smjer prema igraču samo po XZ ravnini
-        Vector3 direction = targetPlayer.position - transform.position;
-        direction.y = 0; // ignoriraj Y
-        float distance = direction.magnitude;
+        Vector3 toPlayer = targetPlayer.position - transform.position;
+        float distance = toPlayer.magnitude;
 
-        direction = direction.normalized;
+        Vector3 moveDir = toPlayer;
+        moveDir.y = 0f;
+        moveDir.Normalize();
 
-        // Postavi speed na 0 ako je blizu, inače koristi normalni speed
         float currentSpeed = speed;
 
-        if (distance <= 1f){
-            metYou=true;    
-            currentSpeed = 0f;}          // stani
-        else if (distance < 3f){
-            metYou=true;
-            currentSpeed = 0f; }         // ostani stani dok ne pređe 2f
-        if(metYou && distance > 3)
+        if (distance <= 1f)
         {
-            isEscape=true;
+            metYou = true;
+            currentSpeed = 0f;
         }
-        // else -> distance >= 2f -> nastavi sa normalnim speed
-
-        // Rotiraj neprijatelja samo ako može da ide
-        if (direction != Vector3.zero && currentSpeed > 0f)
+        else if (distance < 3f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            metYou = true;
+            currentSpeed = 0f;
+        }
+
+        if (metYou && distance > 3f)
+        {
+            isEscape = true;
+        }
+
+        Vector3 lookDir = targetPlayer.position - transform.position;
+        lookDir.y = 0f;
+
+        if (lookDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
 
-        // Pomakni neprijatelja
-        transform.position += direction * currentSpeed * Time.deltaTime;
+        transform.position += moveDir * currentSpeed * Time.deltaTime;
 
-        // Animacija
         animator.SetFloat("speed", currentSpeed);
     }
+
 
 
     

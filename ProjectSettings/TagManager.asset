@@ -9,6 +9,7 @@ TagManager:
   - Knight
   - Soldier
   - KingsGuard
+  - King
   layers:
   - Default
   - TransparentFX
