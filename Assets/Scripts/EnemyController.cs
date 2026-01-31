@@ -1,3 +1,4 @@
+using System.Dynamic;
 using System.Security;
 using UnityEngine;
 
@@ -64,6 +65,11 @@ public class EnemyController : MonoBehaviour
              isCombatMode=true;
         }
 
+        if (isEscape)
+        {
+            MoveTowardsPlayer();
+        }
+
         
         if (anw != null && anw.answer!=null && anw.answer.Length>0)
         {
@@ -92,6 +98,7 @@ public class EnemyController : MonoBehaviour
         {
             isAttacking=true;
             animator.SetTrigger("sword");
+            Invoke("resetAttack", 0.8f);
         }
     }
 
@@ -194,7 +201,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
-
+    
 
     private void OnDrawGizmosSelected()
     {

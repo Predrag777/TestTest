@@ -19,7 +19,6 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        prepareTransform.Stop();
         changeMask=GetComponent<ChangeMask>();
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,7 +40,7 @@ public class Movement : MonoBehaviour
         }
 
         MoveController();
-        RotationController();
+        //RotationController();
         ApplyGravityAndJump();
         UpdateAnimator();
         enemyAimed=detectEnemy();
@@ -61,24 +60,31 @@ public class Movement : MonoBehaviour
 
     void MoveController()
     {
-        if(changeMask.isChanging) return;
+        if (changeMask.isChanging) return;
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 move =
-            transform.forward * vertical +
-            transform.right * horizontal;
+        Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (move != Vector3.zero)
+        if (inputDirection.magnitude >= 0.1f)
         {
-            activeSpeed = speed;  
+            Vector3 moveDirection = inputDirection;
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+
+            
+            controller.Move(moveDirection * speed * Time.deltaTime);
+
+            activeSpeed = speed;
         }
         else
         {
             activeSpeed = 0f;
         }
-            controller.Move(move * speed * Time.deltaTime);
     }
+
 
     float yRotation = 0f;
 
@@ -113,14 +119,11 @@ public class Movement : MonoBehaviour
 
     GameObject detectEnemy()
     {
-        // Položaj centra kockice 2x2x2 ispred igrača
         Vector3 boxCenter = transform.position + transform.forward * 1f + Vector3.up; 
-        Vector3 boxHalfExtents = new Vector3(1f, 1f, 1f); // polovina dimenzija (2x2x2)
+        Vector3 boxHalfExtents = new Vector3(1f, 1f, 1f); 
         
-        // Rotacija kockice ista kao igrača
         Quaternion boxRotation = transform.rotation;
 
-        // Dobij sve kolidere u boxu
         Collider[] hits = Physics.OverlapBox(boxCenter, boxHalfExtents, boxRotation);
 
         foreach (Collider hit in hits)
@@ -141,10 +144,8 @@ public class Movement : MonoBehaviour
 
         Gizmos.color = Color.red;
 
-        // Postavimo matricu za rotaciju
         Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
 
-        // Nacrtaj wireframe cube
         Gizmos.DrawWireCube(Vector3.zero, boxHalfExtents * 2);
     }
 
