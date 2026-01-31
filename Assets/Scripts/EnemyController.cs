@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] float walkSpeed = 2f;
     [SerializeField] float sprintSpeed = 5f;
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] LayerMask playerMask;
+    [SerializeField] float viewAngle=60f;
     private float speed = 0f;
 
     Animator animator;
@@ -43,7 +46,20 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 
-        viewRange();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (CanSeePlayer(player.transform))
+        {
+            Debug.Log("Ugledan");
+            targetPlayer = player.transform;
+        }
+        else
+        {
+            targetPlayer = null;
+        }
+
+
+        //viewRange();
 
         if (targetPlayer != null)
         {
@@ -160,6 +176,44 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    bool CanSeePlayer(Transform player)
+    {
+        Vector3 origin = transform.position + Vector3.up * 1.6f; // visina očiju
+        Vector3 directionToPlayer = (player.position + Vector3.up) - origin;
+
+        float distance = directionToPlayer.magnitude;
+
+        // 1. Distance check
+        if (distance > viewDistance)
+            return false;
+
+        directionToPlayer.Normalize();
+
+        // 2. Angle check (da li je ispred)
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        if (angle > viewAngle * 0.5f)
+            return false;
+
+        // 3. Raycast check (da li ima zid između)
+        RaycastHit hit;
+        if (Physics.Raycast(origin, directionToPlayer, out hit, viewDistance, obstacleMask | playerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
+                return true;
+            }
+            else
+            {
+                Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+
     void MoveTowardsPlayer()
     {
         if (targetPlayer == null) return;
@@ -203,9 +257,19 @@ public class EnemyController : MonoBehaviour
 
     
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+        Vector3 eyeHeight = transform.position + Vector3.up * 1.6f; // visina očiju
+
+        // Limitni ray-evi (FOV)
+        Vector3 leftLimit = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward;
+        Vector3 rightLimit = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(eyeHeight, leftLimit * viewDistance);
+        Gizmos.DrawRay(eyeHeight, rightLimit * viewDistance);
     }
+
+
 }

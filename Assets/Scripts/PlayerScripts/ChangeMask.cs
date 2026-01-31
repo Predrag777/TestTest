@@ -135,7 +135,7 @@ public class ChangeMask : MonoBehaviour
             Destroy(currentMask);
 
         playerStats.visibilityLevel=index+1;
-        if(index>3)
+        if(index+1>3)
             playerStats.visibilityLevel=0;
         
         currentMask = Instantiate(masks[index], maskPos);
