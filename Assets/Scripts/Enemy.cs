@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class Enemy : MonoBehaviour
 {
@@ -32,22 +34,22 @@ public class Enemy : MonoBehaviour
 
 
 
-    Rigidbody rb;    
     GameObject assassin;
     float currSpeed;
     bool isAttacking=true;
     bool isGoodDistance=false;
     GameObject enemyAimed;
+    NavMeshAgent agent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb=GetComponent<Rigidbody>();
         source=GetComponent<AudioSource>();
         assassin=GameObject.FindGameObjectWithTag("Player");
         currSpeed=walkSpeed;
         animator=GetComponent<Animator>();
 
         targetPlayer=assassin.transform;
+        agent=GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -220,8 +222,8 @@ void Patrol()
             Quaternion lookRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
-
-        transform.position += moveDir * currentSpeed * Time.deltaTime;
+        agent.SetDestination(targetPlayer.transform.position);
+        //transform.position += moveDir * currentSpeed * Time.deltaTime;
 
         animator.SetFloat("speed", currentSpeed);
     }
