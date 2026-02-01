@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChangeMask : MonoBehaviour
 {
@@ -8,6 +9,17 @@ public class ChangeMask : MonoBehaviour
     [SerializeField] GameObject[] masks;
     [SerializeField] GameObject baseMask;
     [SerializeField] ParticleSystem smoke;
+
+    [Header("Shadows UI")]
+
+    public int numOfSoldiers=0;
+    public int numOfKnights=0;
+    public int numOfKingsGuard=0;
+
+    [SerializeField] TMP_Text numSoldiersText;
+    [SerializeField] TMP_Text numKnightsText;
+    [SerializeField] TMP_Text numKingsGuardText;
+
 
     [Header("UI Components")]
     [SerializeField] Image fill;
@@ -45,6 +57,10 @@ public class ChangeMask : MonoBehaviour
         StartCoroutine(decreaseFill());
 
         source=GetComponent<AudioSource>();
+
+        numSoldiersText.text=""+numOfSoldiers;
+        numKnightsText.text=""+numOfKnights;
+        numKingsGuardText.text=""+numOfKingsGuard;
     }
 
     void Update()
@@ -119,7 +135,25 @@ public class ChangeMask : MonoBehaviour
     IEnumerator ChangeMyMask(int index)
     {
         if (isChanging) yield break;
+        if(index==0 && numOfSoldiers<=0) yield break;
+        if(index==1 && numOfKnights<=0) yield break;
+        if(index==2 && numOfKingsGuard<=0) yield break; 
 
+        if(index==0 && numOfSoldiers > 0)
+        {
+            numOfSoldiers--;
+            numSoldiersText.text=""+numOfSoldiers;
+        }
+        if(index==1 && numOfKnights > 0)
+        {
+            numOfKnights--;
+            numKnightsText.text=""+numOfKnights;
+        } 
+        if(index==2 && numOfKingsGuard > 0)
+        {
+            numOfKingsGuard--;
+            numKingsGuardText.text=""+numOfKingsGuard;
+        }
 
         source.PlayOneShot(smokeSound);
         movement.animator.SetTrigger("change");
