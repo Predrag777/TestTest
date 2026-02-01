@@ -104,8 +104,8 @@ void Patrol()
     }
 
     dir.Normalize();
-    transform.position += dir * walkSpeed * Time.deltaTime;
-
+    //transform.position += dir * walkSpeed * Time.deltaTime;
+    agent.SetDestination(currentPatrolTarget.transform.position);
     // Rotacija ka patrol point-u
     if (dir.sqrMagnitude > 0.01f)
     {
