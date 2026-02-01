@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
             }
             Invoke("SS", 3f);
         }
-
+        if(isAttacking) return;
         if(Input.GetKeyDown(KeyCode.T) && !isRolling)
         {
             StartCoroutine(RollRoutine());

@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(assassin.GetComponent<PlayerStats>().lost) return;
         seekForPlayer(assassin.transform);
         if (sayStop)
         {
@@ -78,7 +79,7 @@ public class Enemy : MonoBehaviour
             isAttacking=false;
             animator.SetTrigger("sword");
         }
-        if(enemyVisionLevel<enemyAimed.GetComponent<PlayerStats>().visibilityLevel) {sayStop=false;
+        if(enemyAimed!=null && enemyVisionLevel<enemyAimed.GetComponent<PlayerStats>().visibilityLevel) {sayStop=false;
             Patrol();
         }
 

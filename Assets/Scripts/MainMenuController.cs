@@ -59,7 +59,6 @@ public class MainMenuController : MonoBehaviour
 
         float elapsed = 0f;
 
-        // Započni sa trenutnim bojama
         Color textColor = text.color;
         Color imageColor = fadeImage.color;
 
@@ -68,13 +67,11 @@ public class MainMenuController : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = elapsed / fadeDuration;
 
-            // Fade out teksta
             if (text != null)
             {
                 text.color = new Color(textColor.r, textColor.g, textColor.b, Mathf.Lerp(textColor.a, 0f, t));
             }
 
-            // Fade in crnog ekrana
             if (fadeImage != null)
             {
                 fadeImage.color = new Color(imageColor.r, imageColor.g, imageColor.b, Mathf.Lerp(0f, 1f, t));
