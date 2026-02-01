@@ -73,10 +73,13 @@ public class Enemy : MonoBehaviour
             }
         }
         enemyAimed=detectEnemy();
-        if (enemyAimed!=null && isAttacking && sayStop)
+        if (enemyAimed!=null && isAttacking && sayStop && enemyVisionLevel>=enemyAimed.GetComponent<PlayerStats>().visibilityLevel)
         {
             isAttacking=false;
             animator.SetTrigger("sword");
+        }
+        if(enemyVisionLevel<enemyAimed.GetComponent<PlayerStats>().visibilityLevel) {sayStop=false;
+            Patrol();
         }
 
     }
