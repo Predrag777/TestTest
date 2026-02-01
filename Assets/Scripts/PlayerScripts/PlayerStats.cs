@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -6,6 +7,8 @@ public class PlayerStats : MonoBehaviour
     public bool lost=false;
     Movement movement;
     bool isdead=false;
+    public bool isArthurDead=false;
+    bool isWon=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +23,11 @@ public class PlayerStats : MonoBehaviour
             isdead=true;
             movement.animator.SetTrigger("death");
         }
+        if(isArthurDead)
+        {
+            isWon=true;
+        }
+
     }
 
     // Update is called once per frame

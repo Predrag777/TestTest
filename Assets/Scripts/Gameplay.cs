@@ -7,6 +7,7 @@ public class Gameplay : MonoBehaviour
 
     public GameObject [] objectToHide;
     public GameObject showBanner;
+    public GameObject showWinBanner;
     public AudioSource backgroundMusic;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,9 +24,36 @@ public class Gameplay : MonoBehaviour
         if (localStats.lost)
         {
             Invoke("EndGame", 2f);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                restartGame();
+            }
+        }
+
+         if (localStats.isArthurDead)
+        {
+            Invoke("EndGameWin", 2f);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                restartGame();
+            }
         }
     }
 
+
+    void EndGameWin()
+    {
+        if (localStats.isArthurDead)
+        {
+            backgroundMusic.Stop();
+            foreach(GameObject ss in objectToHide)
+                ss.SetActive(false);
+            showWinBanner.SetActive(true);
+            Time.timeScale = 0f;
+ 
+            
+        } 
+    }
 
     void EndGame()
     {
@@ -36,10 +64,7 @@ public class Gameplay : MonoBehaviour
                 ss.SetActive(false);
             showBanner.SetActive(true);
             Time.timeScale = 0f;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                restartScene();
-            }
+ 
             
         } 
     }
@@ -50,4 +75,13 @@ public class Gameplay : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
+
+    public void restartGame()
+    {
+        Time.timeScale = 1f;
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+
 }

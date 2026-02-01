@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     AudioSource source;
 
     [Header("Noticed")]
-    bool sayStop=false;
+    public bool sayStop=false;
     bool isCaught=false;
     bool sayHi=false;
 
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     GameObject assassin;
     float currSpeed;
-    bool isAttacking=true;
+    public bool isAttacking=true;
     bool isGoodDistance=false;
     GameObject enemyAimed;
     NavMeshAgent agent;
