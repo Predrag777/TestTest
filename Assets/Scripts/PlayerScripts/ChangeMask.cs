@@ -202,5 +202,23 @@ public class ChangeMask : MonoBehaviour
         
     }
 
+    public void increaseSoldiers()
+    {
+        numOfSoldiers++;
+        numSoldiersText.text=""+numOfSoldiers;
+    }
+
+    public void increaseKnights()
+    {
+        numOfKnights++;
+        numKnightsText.text=""+numOfKnights;
+    }
+
+    public void increaseKingsGuard()
+    {
+        numOfKingsGuard++;
+        numKingsGuardText.text=""+numOfKingsGuard;
+    }
+
 
 }

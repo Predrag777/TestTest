@@ -37,7 +37,9 @@ public class Movement : MonoBehaviour
             animator.SetTrigger("attack");
             if (enemyAimed != null)
             {
-                
+                if(enemyAimed.name.Contains("knigsGuard")) changeMask.increaseKingsGuard();
+                else if(enemyAimed.name.Contains("knight")) changeMask.increaseKnights();
+                else if(enemyAimed.name.Contains("soldier")) changeMask.increaseSoldiers();
                 Invoke("destroyEnemy", 0.5f);
             }
             Invoke("SS", 3f);
