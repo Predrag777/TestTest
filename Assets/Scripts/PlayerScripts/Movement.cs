@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public Animator animator;
 
     private float activeSpeed=0f;
-    GameObject enemyAimed;
+    public GameObject enemyAimed;
     bool isAttacking=false;
     ChangeMask changeMask;
 
@@ -38,22 +38,9 @@ public class Movement : MonoBehaviour
         {
             isAttacking=true;
             animator.SetTrigger("attack");
-            if (enemyAimed != null)
-            {
-                if(!enemyAimed.name.Contains("Arthur"))
-                    Invoke("destroyEnemy", 0.5f);
-                else{
-                    enemyAimed.GetComponent<Arthur>().animator.SetTrigger("death");
-                    ps.isArthurDead=true;
-                }
-                if(enemyAimed.name.Contains("knigsGuard")) changeMask.increaseKingsGuard();
-                else if(enemyAimed.name.Contains("knight")) changeMask.increaseKnights();
-                else if(enemyAimed.name.Contains("soldier")) changeMask.increaseSoldiers();
-                
-            }
             
 
-            Invoke("SS", 2f);
+            Invoke("SS", 1f);
             
         }
         if(isAttacking) return;
@@ -83,11 +70,6 @@ public class Movement : MonoBehaviour
         isAttacking=false;
     }
 
-    void destroyEnemy()
-    {
-        if(enemyAimed!=null)
-        Destroy(enemyAimed);
-    }
 
     void MoveController()
     {

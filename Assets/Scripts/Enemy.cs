@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     private float speed = 0f;
 
-    Animator animator;
+    [HideInInspector] public Animator animator;
     Transform targetPlayer;
 
     [Header("AudioSource")]
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject currentPatrolTarget;
     private float patrolThreshold = 0.2f; // koliko blizu treba da dođe do point-a
-
+    bool isAlive=true;
 
 
     GameObject assassin;
@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isAlive) return;
         if(assassin.GetComponent<PlayerStats>().lost) return;
         seekForPlayer(assassin.transform);
         if (sayStop)
@@ -84,7 +85,10 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    public void unalived()
+    {
+        isAlive=false;
+    }
 
 void Patrol()
 {
@@ -95,10 +99,9 @@ void Patrol()
     Vector3 dir = currentPatrolTarget.transform.position - transform.position;
     dir.y = 0f;
 
-    // Ako smo blizu, promijeni target
     if (dir.magnitude <= patrolThreshold)
     {
-        if (currentPatrolTarget == point1)
+        if (currentPatrolTarget == point1 && point2!=null)
             currentPatrolTarget = point2;
         else
             currentPatrolTarget = point1;
@@ -108,9 +111,9 @@ void Patrol()
     }
 
     dir.Normalize();
-    //transform.position += dir * walkSpeed * Time.deltaTime;
+    
     agent.SetDestination(currentPatrolTarget.transform.position);
-    // Rotacija ka patrol point-u
+
     if (dir.sqrMagnitude > 0.01f)
     {
         Quaternion lookRotation = Quaternion.LookRotation(dir);
