@@ -5,6 +5,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
     [SerializeField] float mouseSensitivity = 10f;
+    [SerializeField] float sprintSpeed = 8f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpHeight = 2f;
 
