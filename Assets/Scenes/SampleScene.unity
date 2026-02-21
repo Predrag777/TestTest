@@ -1781,6 +1781,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 1253884677}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -8007,6 +8008,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 0}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -8457,6 +8459,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6481610570674249158, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -8487,7 +8497,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2391087445799668881, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-    - {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4426233425865313801, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
@@ -10130,6 +10139,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 2043902587}
   point2: {fileID: 495431872}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -13153,6 +13163,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 1109376556}
   point2: {fileID: 1237407973}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -18576,8 +18587,11 @@ MonoBehaviour:
   gravity: -9.81
   jumpHeight: 2
   animator: {fileID: 0}
+  enemyAimed: {fileID: 0}
   rollSpeed: 5
   isRolling: 0
+  weapons: []
+  selectedWeapons: 0
 --- !u!136 &943990133
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18723,6 +18737,7 @@ MonoBehaviour:
   numKnightsText: {fileID: 1535360992}
   numKingsGuardText: {fileID: 1651761848}
   fill: {fileID: 1068059809}
+  currentMask: {fileID: 0}
   isChanging: 0
   smokeSound: {fileID: 8300000, guid: f5db6bd5177584b99af70f5b0b3147d8, type: 3}
   prepareTransform: {fileID: 0}
@@ -20860,6 +20875,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 0}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -22307,6 +22323,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4102393140311260063, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102393140311260063, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4315856225752574146, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -22459,8 +22483,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4102393140311260063, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7572091572336395676, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
@@ -24768,6 +24791,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 1877289622}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -25538,6 +25562,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1961937139714346075, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -25706,8 +25738,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4294295122704752290, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
@@ -25964,6 +25995,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6481610570674249158, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -25994,7 +26033,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2391087445799668881, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-    - {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4426233425865313801, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
@@ -26276,6 +26314,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 728850626}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -26308,6 +26347,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &1349445137
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349445115}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1351773136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34071,8 +34137,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
@@ -34780,6 +34846,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1961937139714346075, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -34948,8 +35022,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4294295122704752290, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
@@ -37257,6 +37330,7 @@ MonoBehaviour:
   viewDistance: 10
   point1: {fileID: 67855082}
   point2: {fileID: 0}
+  animator: {fileID: 0}
   audios:
   - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
   - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
@@ -39895,6 +39969,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6481610570674249158, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -39925,7 +40007,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2391087445799668881, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-    - {fileID: 5994058723052490289, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4426233425865313801, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
@@ -40021,6 +40102,14 @@ PrefabInstance:
     - target: {fileID: 1792459900287935427, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1961937139714346075, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_Layer
@@ -40190,8 +40279,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1807363975393374612, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4294295122704752290, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
@@ -40477,6 +40565,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1349445133}
+    - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1349445137}
   m_SourcePrefab: {fileID: 100100000, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

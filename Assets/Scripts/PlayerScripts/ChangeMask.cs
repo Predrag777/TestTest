@@ -25,7 +25,7 @@ public class ChangeMask : MonoBehaviour
     [SerializeField] Image fill;
 
     Transform maskPos;
-    GameObject currentMask;
+    public GameObject currentMask;
     Movement movement;
     public bool isChanging;
     PlayerStats playerStats;

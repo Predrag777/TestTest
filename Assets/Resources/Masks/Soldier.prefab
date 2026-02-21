@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3ef9bc1fdecb8835d8c24ede6219581f, type: 3}
+      propertyPath: m_TagString
+      value: mask
+      objectReference: {fileID: 0}
     - target: {fileID: 2664098864995057252, guid: 3ef9bc1fdecb8835d8c24ede6219581f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -90,3 +94,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
+  weapons: []

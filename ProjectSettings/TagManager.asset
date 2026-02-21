@@ -10,6 +10,8 @@ TagManager:
   - Soldier
   - KingsGuard
   - King
+  - weapon
+  - mask
   layers:
   - Default
   - TransparentFX
