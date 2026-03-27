@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
     public AudioClip [] weaponsSelectionClips;
     public int selectedWeapons=0;
     AudioSource source;
-
+    
 
     void Start()
     {
@@ -44,35 +44,38 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetMouseButtonDown(0)) && !isAttacking)
-        {
-            isAttacking=true;
-            if(selectedWeapons==0)
-                animator.SetTrigger("attack");
-            else
-                animator.SetTrigger("slash");
+        //Debug.Log("SSSSSSSSSSSSSSS    "+changeMask.activeMaskProp);
+        //if(changeMask.activeMaskProp.weapons.Length>0){
+            if ((Input.GetMouseButtonDown(0)) && !isAttacking)
+            {
+                isAttacking=true;
+                if(selectedWeapons==0)
+                    animator.SetTrigger("attack");
+                else
+                    animator.SetTrigger("slash");
 
-            Invoke("SS", 1f);
-            
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            selectedWeapons=0;
+                Invoke("SS", 1f);
+            }
 
-            source.PlayOneShot(weaponsSelectionClips[0]);
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                selectedWeapons=0;
 
-            weaponsSelection[0].SetActive(true);
-            weaponsSelection[1].SetActive(false);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            selectedWeapons=1;
+                source.PlayOneShot(weaponsSelectionClips[0]);
 
-            source.PlayOneShot(weaponsSelectionClips[1]);
+                weaponsSelection[0].SetActive(true);
+                weaponsSelection[1].SetActive(false);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                selectedWeapons=1;
 
-            weaponsSelection[1].SetActive(true);
-            weaponsSelection[0].SetActive(false);
-        }
+                source.PlayOneShot(weaponsSelectionClips[1]);
+
+                weaponsSelection[1].SetActive(true);
+                weaponsSelection[0].SetActive(false);
+            }
+        //}
         if(isAttacking) return;
         if(Input.GetKeyDown(KeyCode.T) && !isRolling)
         {

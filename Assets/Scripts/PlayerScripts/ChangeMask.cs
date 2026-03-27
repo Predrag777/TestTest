@@ -7,8 +7,10 @@ public class ChangeMask : MonoBehaviour
 {
     [Header("Basic Property")]
     [SerializeField] GameObject[] masks;
+    [SerializeField] MaskProp [] maskProperites;
     [SerializeField] GameObject baseMask;
     [SerializeField] ParticleSystem smoke;
+    public MaskProp activeMaskProp;
 
     [Header("Shadows UI")]
 
@@ -172,6 +174,9 @@ public class ChangeMask : MonoBehaviour
         if(index+1>3)
             playerStats.visibilityLevel=0;
         
+        
+        activeMaskProp=maskProperites[index];
+
         currentMask = Instantiate(masks[index], maskPos);
         currentMask.transform.localPosition = Vector3.zero;
         currentMask.transform.localRotation = Quaternion.identity;
