@@ -13,6 +13,7 @@ public class Sword : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && enemy.sayStop)
         {
+            Debug.Log("MAC ME JE POGODIO "+other.gameObject.GetComponent<PlayerStats>().healthUI);
             other.gameObject.GetComponent<PlayerStats>().takeDamage();
             if(other.gameObject.GetComponent<PlayerStats>().health<=0)
                 other.gameObject.GetComponent<PlayerStats>().lost=true;

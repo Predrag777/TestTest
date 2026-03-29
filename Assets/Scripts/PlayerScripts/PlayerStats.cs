@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public int health=100;
     public int visibilityLevel;
-    private Image healthUI;
+    public Image healthUI;
     public bool lost=false;
     Movement movement;
     bool isdead=false;
@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     {
         movement=GetComponent<Movement>();
         //animator=GetComponent<Animator>();
-        healthUI=GetComponentInChildren<Image>();
+        //healthUI=GetComponent<Image>();
     }
 
     void Update()
@@ -49,6 +49,9 @@ public class PlayerStats : MonoBehaviour
 
     public void takeDamage()
     {
+        if(healthUI==null) return;
+
+        Debug.Log("Izgubio healthe");
         health-=10;
         healthUI.fillAmount=health/100f;
     }
