@@ -8,6 +8,8 @@ public class CombatController : MonoBehaviour
     public MaskProp myMask;
     public GameObject swordObj;
 
+    int count=1;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,7 +35,8 @@ public class CombatController : MonoBehaviour
 
         if(swordPull && Input.GetMouseButtonDown(0))
         {
-            currMove.animator.SetTrigger("slash");
+            currMove.animator.SetTrigger(("slash"+count));
+
         }
 
 
@@ -56,6 +59,13 @@ public class CombatController : MonoBehaviour
             swordPull=false;
             currMove.animator.SetTrigger("return");
         }*/
+    }
+
+    public void increaseCount()
+    {
+        count++;
+        if(count>3)
+            count=1;
     }
 
     public void swordPulled()
