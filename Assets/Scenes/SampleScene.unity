@@ -18714,6 +18714,7 @@ GameObject:
   - component: {fileID: 943990139}
   - component: {fileID: 943990140}
   - component: {fileID: 943990141}
+  - component: {fileID: 943990142}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -18918,6 +18919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   visibilityLevel: 0
+  healthUI: {fileID: 225518536}
   lost: 0
   isArthurDead: 0
   isFightingMode: 0
@@ -19032,6 +19034,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &943990142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943990131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7093f6b06e42ea051a1b1ec5ceae1fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &944327659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}

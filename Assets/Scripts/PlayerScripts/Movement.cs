@@ -51,8 +51,8 @@ public class Movement : MonoBehaviour
                 isAttacking=true;
                 if(selectedWeapons==0)
                     animator.SetTrigger("attack");
-                else
-                    animator.SetTrigger("slash");
+                /*else
+                    animator.SetTrigger("slash");*/
 
                 Invoke("SS", 1f);
             }
