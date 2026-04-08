@@ -12,6 +12,7 @@ TagManager:
   - King
   - weapon
   - mask
+  - katana
   layers:
   - Default
   - TransparentFX
