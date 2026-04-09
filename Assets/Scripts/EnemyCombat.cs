@@ -104,4 +104,9 @@ public class EnemyCombat : MonoBehaviour
     {
         Debug.Log("Sudario sam se sa: " + collision.gameObject.name);
     }
+
+      void resetAttack()
+    {
+        
+    }
 }

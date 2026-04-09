@@ -7304,6 +7304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8728717901871177989, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Name
       value: soldierTest
@@ -7311,6 +7315,10 @@ PrefabInstance:
     - target: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9137446411988947745, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Layer
@@ -7320,7 +7328,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8728717901871177989, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7572091572336395676, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
@@ -7335,10 +7344,10 @@ PrefabInstance:
       addedObject: {fileID: 1799781088}
     - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1799781087}
+      addedObject: {fileID: 1799781093}
     - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1799781093}
+      addedObject: {fileID: 1799781087}
   m_SourcePrefab: {fileID: 100100000, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
 --- !u!1001 &330273476
 PrefabInstance:

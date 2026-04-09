@@ -16,6 +16,11 @@ public class CombatController : MonoBehaviour
     [SerializeField] AudioClip swing1;
     [SerializeField] AudioClip swing2;
 
+
+    CapsuleCollider myCollider;
+
+    public bool isBlock=false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +30,8 @@ public class CombatController : MonoBehaviour
 
         source=GetComponent<AudioSource>();
         swordObj=myMask.weapons[1];
+
+        myCollider=GetComponent<CapsuleCollider>();
     }
     int c=1;
     // Update is called once per frame
@@ -38,7 +45,8 @@ public class CombatController : MonoBehaviour
         {
             c++; 
         }
-        currMove.animator.SetBool("block", (c%2==0));
+        
+        blockControl();
 
         if (!swordPull && Input.GetMouseButtonDown(0))
         {
@@ -89,4 +97,20 @@ public class CombatController : MonoBehaviour
     {
         swordPull=true;
     }
+
+    void blockControl()
+    {
+        currMove.animator.SetBool("block", (c%2==0));
+        if (c % 2 == 0)
+        {
+            isBlock=true;
+        }
+        else
+        {
+            isBlock=false;
+        }
+
+    }
+
+  
 }

@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    Enemy enemy;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        enemy=GetComponentInParent<Enemy>();
+        //enemy=GetComponentInParent<Enemy>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && enemy.sayStop)
+        if (other.gameObject.CompareTag("Player"))
         {
+            if(other.gameObject.GetComponent<CombatController>().isBlock) return;
             Debug.Log("MAC ME JE POGODIO "+other.gameObject.GetComponent<PlayerStats>().healthUI);
             other.gameObject.GetComponent<PlayerStats>().takeDamage();
             if(other.gameObject.GetComponent<PlayerStats>().health<=0)
