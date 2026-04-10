@@ -156,9 +156,12 @@ public class Movement : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
             }
 
-            controller.Move(moveDirection * speed * Time.deltaTime);
+            bool isSprinting = Input.GetKey(KeyCode.LeftShift) && !hasEnemy;
+            float currentMoveSpeed = isSprinting ? sprintSpeed : speed;
 
-            activeSpeed = speed;
+            controller.Move(moveDirection * currentMoveSpeed * Time.deltaTime);
+
+            activeSpeed = currentMoveSpeed;
         }
         else
         {
