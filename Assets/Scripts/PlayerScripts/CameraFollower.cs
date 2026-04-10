@@ -12,23 +12,49 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float minDistance = 0.5f;       // minimalna udaljenost od igraca
     [SerializeField] LayerMask collisionMask;        // koji layer-i blokiraju kameru
 
+    [SerializeField] Vector3 lockOnOffset = new Vector3(0, 2, -3);
+
     float yaw = 0f;
     float pitch = 15f;
+
+    CombatController combatController;
+
+    void Start()
+    {
+        if(target != null)
+            combatController = target.GetComponent<CombatController>();
+    }
 
     void LateUpdate()
     {
         if (target == null) return;
 
-        // Rotacija kamere preko miša
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        pitch = Mathf.Clamp(pitch, -30f, 60f);
+        bool hasEnemy = combatController != null && combatController.enemy != null;
 
-        // Izračunaj rotaciju kamere
-        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+        Vector3 desiredPosition;
 
-        // Idealna (zeljena) pozicija kamere
-        Vector3 desiredPosition = target.position + rotation * offset;
+        if(hasEnemy)
+        {
+            // Lock-on: kamera iza igraca, gledajuci ka neprijatelju
+            Transform enemyTransform = combatController.enemy.transform;
+            Vector3 dirToEnemy = (enemyTransform.position - target.position).normalized;
+            dirToEnemy.y = 0f;
+            dirToEnemy.Normalize();
+
+            // Kamera ide iza igraca (suprotno od neprijatelja)
+            Quaternion lockRot = Quaternion.LookRotation(dirToEnemy);
+            desiredPosition = target.position + lockRot * lockOnOffset;
+        }
+        else
+        {
+            // Normalna rotacija kamere preko misa
+            yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
+            pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            pitch = Mathf.Clamp(pitch, -30f, 60f);
+
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            desiredPosition = target.position + rotation * offset;
+        }
 
         // =====================================================
         // 🔽 ANTI-CLIPPING LOGIKA
@@ -52,8 +78,6 @@ public class CameraFollow : MonoBehaviour
         ))
         {
             Debug.DrawRay(target.position, direction * distance, Color.red);
-            // Ako smo pogodili prepreku,
-            // postavimo kameru malo ispred mesta sudara
             float hitDistance = Mathf.Clamp(hit.distance, minDistance, distance);
             desiredPosition = target.position + direction * hitDistance;
         }
@@ -63,7 +87,16 @@ public class CameraFollow : MonoBehaviour
         // Smooth pomeranje ka finalnoj poziciji
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
 
-        // Kamera uvek gleda u igraca
-        transform.LookAt(target.position + Vector3.up * 1.5f);
+        if(hasEnemy)
+        {
+            // Gledaj izmedju igraca i neprijatelja
+            Vector3 midPoint = (target.position + combatController.enemy.transform.position) / 2f;
+            transform.LookAt(midPoint + Vector3.up * 1f);
+        }
+        else
+        {
+            // Kamera uvek gleda u igraca
+            transform.LookAt(target.position + Vector3.up * 1.5f);
+        }
     }
 }

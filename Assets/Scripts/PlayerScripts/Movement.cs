@@ -104,9 +104,14 @@ public class Movement : MonoBehaviour
     }
 
 
+    CombatController combatController;
+
     void MoveController()
     {
         if (changeMask.isChanging) return;
+
+        if(combatController == null)
+            combatController = GetComponent<CombatController>();
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -115,20 +120,41 @@ public class Movement : MonoBehaviour
 
         if (inputDirection.magnitude >= 0.1f)
         {
-            // Uzimamo pravce kamere
-            Vector3 camForward = Camera.main.transform.forward;
-            Vector3 camRight = Camera.main.transform.right;
+            bool hasEnemy = combatController != null && combatController.enemy != null;
 
-            camForward.y = 0f;
-            camRight.y = 0f;
+            Vector3 moveDirection;
 
-            camForward.Normalize();
-            camRight.Normalize();
+            if(hasEnemy)
+            {
+                // Lock-on: kretanje relativno prema neprijatelju (strafe)
+                Vector3 dirToEnemy = combatController.enemy.transform.position - transform.position;
+                dirToEnemy.y = 0f;
+                dirToEnemy.Normalize();
 
-            Vector3 moveDirection = camForward * vertical + camRight * horizontal;
+                Vector3 lockForward = dirToEnemy;
+                Vector3 lockRight = Vector3.Cross(Vector3.up, lockForward).normalized;
 
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+                moveDirection = lockForward * vertical + lockRight * horizontal;
+
+                // Ne rotiramo igraca - to radi CombatController.LateUpdate
+            }
+            else
+            {
+                // Uzimamo pravce kamere
+                Vector3 camForward = Camera.main.transform.forward;
+                Vector3 camRight = Camera.main.transform.right;
+
+                camForward.y = 0f;
+                camRight.y = 0f;
+
+                camForward.Normalize();
+                camRight.Normalize();
+
+                moveDirection = camForward * vertical + camRight * horizontal;
+
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+            }
 
             controller.Move(moveDirection * speed * Time.deltaTime);
 
