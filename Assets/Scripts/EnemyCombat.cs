@@ -97,7 +97,7 @@ public class EnemyCombat : MonoBehaviour
                 animator.SetTrigger("hit");
             }else{
                 source.PlayOneShot(death);
-                animator.SetTrigger("death");
+                animator.SetTrigger("death2");
             }
         }
     }

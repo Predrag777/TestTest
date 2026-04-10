@@ -7573,6 +7573,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 320
+  lockOnOffset: {x: 0, y: 2, z: -3}
 --- !u!1001 &331179786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19414,6 +19415,8 @@ MonoBehaviour:
   swing1: {fileID: 8300000, guid: 5f9b7862fca3a7827835af1f5b5578a6, type: 3}
   swing2: {fileID: 8300000, guid: 10104d176b1e1888a89f0cbaafb3abbf, type: 3}
   isBlock: 0
+  swordDanger: 0
+  enemy: {fileID: 0}
 --- !u!1 &944327659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
@@ -35269,11 +35272,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewPoint: 20
   health: 3
   hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
   death: {fileID: 8300000, guid: 6f4f8188b95bf36b787ee1b5ac23ea51, type: 3}
   keepDistance: 2
   attackCooldown: 1.5
+  isDanger: 0
 --- !u!1 &1803333725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
