@@ -13,7 +13,11 @@ public class Sword : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if(other.gameObject.GetComponent<CombatController>().isBlock) return;
+            if(other.gameObject.GetComponent<CombatController>().isBlock){
+                MaskProp myMask=other.gameObject.GetComponentInChildren<MaskProp>();
+                myMask.playSparks();    
+                return;
+            }
             Debug.Log("MAC ME JE POGODIO "+other.gameObject.GetComponent<PlayerStats>().healthUI);
             other.gameObject.GetComponent<PlayerStats>().takeDamage();
             if(other.gameObject.GetComponent<PlayerStats>().health<=0)
