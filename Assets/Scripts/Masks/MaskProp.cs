@@ -24,6 +24,18 @@ public class MaskProp : MonoBehaviour
             ss.SetActive(false);
     }
 
+    void Update()
+    {
+        if (combatController.swordDanger)
+        {
+            weapons[1].GetComponent<BoxCollider>().enabled = true;
+        }
+        else
+        {
+            weapons[1].GetComponent<BoxCollider>().enabled = false;
+        }
+    }
+
     void activeWeapon()
     {
         weapons[movement.selectedWeapons].SetActive(true);
@@ -56,5 +68,15 @@ public class MaskProp : MonoBehaviour
         {
             combatController.swordPulled();
         }
+    }
+
+    public void swordDanger()
+    {
+        combatController.swordDanger=true;
+    }
+
+    public void swordNotDanger()
+    {
+        combatController.swordDanger=false;
     }
 }

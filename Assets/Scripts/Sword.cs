@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    EnemyCombat enemyCombat;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        enemyCombat=GetComponentInParent<EnemyCombat>();
         //enemy=GetComponentInParent<Enemy>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && enemyCombat.isDanger)
         {
+            
             if(other.gameObject.GetComponent<CombatController>().isBlock){
                 MaskProp myMask=other.gameObject.GetComponentInChildren<MaskProp>();
                 myMask.playSparks();    

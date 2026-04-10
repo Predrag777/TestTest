@@ -21,6 +21,11 @@ public class CombatController : MonoBehaviour
 
     public bool isBlock=false;
 
+    public bool swordDanger=false;
+
+
+    public GameObject enemy;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -110,6 +115,27 @@ public class CombatController : MonoBehaviour
             isBlock=false;
         }
 
+    }
+
+    void LateUpdate()
+    {
+        if(enemy != null)
+        {
+            EnemyCombat ec = enemy.GetComponent<EnemyCombat>();
+            if(ec != null && ec.health <= 0)
+            {
+                enemy = null;
+                return;
+            }
+
+            Vector3 lookDir = enemy.transform.position - transform.position;
+            lookDir.y = 0f;
+            if(lookDir.sqrMagnitude > 0.01f)
+            {
+                Quaternion rot = Quaternion.LookRotation(lookDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10f);
+            }
+        }
     }
 
   

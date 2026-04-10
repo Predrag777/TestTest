@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyCombat : MonoBehaviour
 {
+    [SerializeField] float viewPoint=20f;
     Animator animator;
     public int health=3;
     AudioSource source;
@@ -16,6 +17,8 @@ public class EnemyCombat : MonoBehaviour
 
     bool isAttacking = false;
 
+    public bool isDanger=false;
+    CombatController myController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +27,9 @@ public class EnemyCombat : MonoBehaviour
         agent=GetComponent<NavMeshAgent>();
         
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+        myController=playerObj.GetComponent<CombatController>();
+
         if(playerObj != null)
             player = playerObj.transform;
     }
@@ -42,8 +48,14 @@ public class EnemyCombat : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        
-
+        // Ako igrac nije u viewPointu, ne radi nista
+        if(distance > viewPoint)
+        {
+            if(agent.enabled) agent.ResetPath();
+            animator.SetFloat("speed", 0f);
+            return;
+        }
+        myController.enemy=this.gameObject;
         if(distance > keepDistance)
         {
             agent.isStopped = false;
@@ -88,6 +100,15 @@ public class EnemyCombat : MonoBehaviour
                 animator.SetTrigger("death");
             }
         }
+    }
+
+    public void swordDanger()
+    {
+        isDanger=true;
+    }
+    public void swordNotDanger()
+    {
+        isDanger=false;
     }
 
     public void hurt()
