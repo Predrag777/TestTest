@@ -7318,7 +7318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9137446411988947745, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Layer
@@ -19413,6 +19413,7 @@ MonoBehaviour:
   swordReturn: {fileID: 8300000, guid: 428a51eb063f594cbba78885fb4c18b2, type: 3}
   swing1: {fileID: 8300000, guid: 5f9b7862fca3a7827835af1f5b5578a6, type: 3}
   swing2: {fileID: 8300000, guid: 10104d176b1e1888a89f0cbaafb3abbf, type: 3}
+  isBlock: 0
 --- !u!1 &944327659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
