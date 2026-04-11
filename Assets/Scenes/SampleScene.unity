@@ -26922,7 +26922,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349445115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
   m_Name: 
@@ -27000,6 +27000,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1349445141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349445115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  health: 3
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 6f4f8188b95bf36b787ee1b5ac23ea51, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1001 &1351773136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35272,7 +35298,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewPoint: 20
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   health: 3
   hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
   death: {fileID: 8300000, guid: 6f4f8188b95bf36b787ee1b5ac23ea51, type: 3}
@@ -41618,6 +41651,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9137446411988947745, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -41646,6 +41683,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1349445137}
+    - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1349445141}
   m_SourcePrefab: {fileID: 100100000, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

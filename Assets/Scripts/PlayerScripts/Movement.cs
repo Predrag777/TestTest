@@ -26,6 +26,17 @@ public class Movement : MonoBehaviour
     public AudioClip [] weaponsSelectionClips;
     public int selectedWeapons=0;
     AudioSource source;
+
+    CombatController combatController;
+
+    // Dodge double-tap detection
+    float doubleTapTime = 0.3f;
+    float lastTapTimeA = -1f;
+    float lastTapTimeD = -1f;
+    float lastTapTimeS = -1f;
+    bool isDodging = false;
+    [SerializeField] float dodgeSpeed = 8f;
+    Vector3 dodgeDirection = Vector3.zero;
     
 
     void Start()
@@ -40,6 +51,8 @@ public class Movement : MonoBehaviour
         weaponsSelection[0].SetActive(true);
         weaponsSelection[1].SetActive(false);
 
+
+        combatController=GetComponent<CombatController>();
     }
 
     void Update()
@@ -76,6 +89,63 @@ public class Movement : MonoBehaviour
                 weaponsSelection[0].SetActive(false);
             }
         //}
+
+        ///////////////////DODGES
+        if ( !isDodging)//combatController.enemy != null && 
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (Time.time - lastTapTimeA < doubleTapTime)
+                {
+                    isDodging = true;
+                    dodgeDirection = -transform.right;
+                    animator.SetTrigger("leftDodge");
+                    Invoke("ResetDodge", 0.5f);
+                    lastTapTimeA = -1f;
+                }
+                else
+                    lastTapTimeA = Time.time;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (Time.time - lastTapTimeD < doubleTapTime)
+                {
+                    isDodging = true;
+                    dodgeDirection = transform.right;
+                    animator.SetTrigger("rightDodge");
+                    Invoke("ResetDodge", 0.5f);
+                    lastTapTimeD = -1f;
+                }
+                else
+                    lastTapTimeD = Time.time;
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (Time.time - lastTapTimeS < doubleTapTime)
+                {
+                    isDodging = true;
+                    dodgeDirection = -transform.forward;
+                    animator.SetTrigger("backDodge");
+                    Invoke("ResetDodge", 0.5f);
+                    lastTapTimeS = -1f;
+                }
+                else
+                    lastTapTimeS = Time.time;
+            }
+        }
+
+
+
+        ////////////////
+
+        if(isDodging)
+        {
+            DodgeMove();
+            return;
+        }
+
         if(isAttacking) return;
         if(Input.GetKeyDown(KeyCode.T) && !isRolling)
         {
@@ -103,8 +173,19 @@ public class Movement : MonoBehaviour
         isAttacking=false;
     }
 
+    void ResetDodge()
+    {
+        isDodging = false;
+        dodgeDirection = Vector3.zero;
+    }
 
-    CombatController combatController;
+    void DodgeMove()
+    {
+        Vector3 dir = dodgeDirection;
+        dir.y = 0f;
+        dir.Normalize();
+        controller.Move(dir * dodgeSpeed * Time.deltaTime);
+    }
 
     void MoveController()
     {

@@ -3,8 +3,11 @@ using UnityEngine.AI;
 
 public class EnemyCombat : MonoBehaviour
 {
-    [SerializeField] float viewPoint=20f;
-    Animator animator;
+    [SerializeField] float viewDistance=20f;
+    [SerializeField] float viewAngle=60f;
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] LayerMask playerMask;
+    Animator animator;//
     public int health=3;
     AudioSource source;
     NavMeshAgent agent;
@@ -46,15 +49,15 @@ public class EnemyCombat : MonoBehaviour
 
         animator.SetBool("swordActive", true);
 
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        // Ako igrac nije u viewPointu, ne radi nista
-        if(distance > viewPoint)
+        // Provjera vizije umjesto samo distance
+        if(!CanSeePlayer(player))
         {
             if(agent.enabled) agent.ResetPath();
             animator.SetFloat("speed", 0f);
             return;
         }
+
+        float distance = Vector3.Distance(transform.position, player.position);
         myController.enemy=this.gameObject;
         if(distance > keepDistance)
         {
@@ -126,8 +129,44 @@ public class EnemyCombat : MonoBehaviour
         Debug.Log("Sudario sam se sa: " + collision.gameObject.name);
     }
 
-      void resetAttack()
+    bool CanSeePlayer(Transform playerTarget)
     {
-        
+        Vector3 origin = transform.position + Vector3.up * 1.6f;
+        Vector3 directionToPlayer = (playerTarget.position + Vector3.up) - origin;
+
+        float distance = directionToPlayer.magnitude;
+
+        // 1. Distance check
+        if (distance > viewDistance)
+            return false;
+
+        directionToPlayer.Normalize();
+
+        // 2. Angle check (da li je ispred)
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        if (angle > viewAngle * 0.5f)
+            return false;
+
+        // 3. Raycast check (da li ima zid između)
+        RaycastHit hit;
+        if (Physics.Raycast(origin, directionToPlayer, out hit, viewDistance, obstacleMask | playerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
+                return true;
+            }
+            else
+            {
+                Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    void resetAttack()
+    {
     }
 }
