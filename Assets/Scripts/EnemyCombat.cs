@@ -19,9 +19,12 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] float attackCooldown = 1.5f;
 
     bool isAttacking = false;
+    bool hasSeenPlayer = false;
 
     public bool isDanger=false;
     CombatController myController;
+
+    bool isDead=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +43,7 @@ public class EnemyCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isDead) return;
         if(player == null || health <= 0)
         {
             if(agent.enabled) agent.ResetPath();
@@ -49,21 +53,34 @@ public class EnemyCombat : MonoBehaviour
 
         animator.SetBool("swordActive", true);
 
-        // Provjera vizije umjesto samo distance
-        if(!CanSeePlayer(player))
+        // Provjera vizije - jednom kad vidi igraca, prati ga zauvijek
+        if(!hasSeenPlayer)
         {
-            if(agent.enabled) agent.ResetPath();
-            animator.SetFloat("speed", 0f);
-            return;
+            if(!CanSeePlayer(player))
+            {
+                if(agent.enabled) agent.ResetPath();
+                animator.SetFloat("speed", 0f);
+                return;
+            }
+            hasSeenPlayer = true;
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
         myController.enemy=this.gameObject;
         if(distance > keepDistance)
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
-            animator.SetFloat("speed", agent.velocity.magnitude);
+            // Ne pomjeraj se dok napadas
+            if(isAttacking)
+            {
+                agent.isStopped = true;
+                animator.SetFloat("speed", 0f);
+            }
+            else
+            {
+                agent.isStopped = false;
+                agent.SetDestination(player.position);
+                animator.SetFloat("speed", agent.velocity.magnitude);
+            }
         }
         else
         {
@@ -95,10 +112,12 @@ public class EnemyCombat : MonoBehaviour
         {
             
             Debug.Log("Pogodjen je sa "+collider.tag);
-            if(health>0){
+            if(health>1){
                 source.PlayOneShot(hitSound);
                 animator.SetTrigger("hit");
-            }else{
+            }else if(health<=1){
+                isDead=true;
+                health=-2;
                 source.PlayOneShot(death);
                 animator.SetTrigger("death2");
             }
