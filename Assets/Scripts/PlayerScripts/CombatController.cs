@@ -66,7 +66,12 @@ public class CombatController : MonoBehaviour
         if(swordPull && Input.GetMouseButtonDown(0) && isAttackAvail)
         {
             source.PlayOneShot(swing2);
+            Debug.Log("COUNT=>   "+count);
             currMove.animator.SetTrigger(("slash"+count));
+            count++;
+            if(count>3)
+                count=1;
+            
             isAttackAvail=false;
 
         }
