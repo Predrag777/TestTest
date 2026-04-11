@@ -27,6 +27,7 @@ public class EnemyCombat : MonoBehaviour
     PlayerStats playerStats;
 
     bool isDead=false;
+    bool isHitCooldown=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -130,9 +131,9 @@ public class EnemyCombat : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("katana"))
+        if (collider.CompareTag("katana") && !isHitCooldown)
         {
-            
+            isHitCooldown=true;
             Debug.Log("Pogodjen je sa "+collider.tag);
             if(health>1){
                 source.PlayOneShot(hitSound);
@@ -143,7 +144,13 @@ public class EnemyCombat : MonoBehaviour
                 source.PlayOneShot(death);
                 animator.SetTrigger("death2");
             }
+            Invoke("hurtReset",0.5f);//
         }
+    }
+
+    public void hurtReset()
+    {
+        isHitCooldown=false;
     }
 
     public void deathPlay(){
@@ -164,6 +171,7 @@ public class EnemyCombat : MonoBehaviour
 
     public void hurt()
     {
+        Debug.Log("HURT ACTIV");
         health--;
     }
 
@@ -217,4 +225,12 @@ public class EnemyCombat : MonoBehaviour
     void resetAttack()
     {
     }
+
+    void finishAttack(){
+
+    }
+
+    void lockAttacking(){}
+
+    void unlockAttacking(){}
 }

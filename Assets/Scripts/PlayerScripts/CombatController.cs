@@ -26,6 +26,8 @@ public class CombatController : MonoBehaviour
 
     public GameObject enemy;
 
+    public bool isAttackAvail=false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,10 +63,11 @@ public class CombatController : MonoBehaviour
             currMove.animator.SetTrigger("pull");
         }
 
-        if(swordPull && Input.GetMouseButtonDown(0))
+        if(swordPull && Input.GetMouseButtonDown(0) && isAttackAvail)
         {
             source.PlayOneShot(swing2);
             currMove.animator.SetTrigger(("slash"+count));
+            isAttackAvail=false;
 
         }
 
@@ -91,6 +94,11 @@ public class CombatController : MonoBehaviour
         }*/
     }
 
+    public void stopAttack()
+    {
+        isAttackAvail=true;
+    }
+
     public void increaseCount()
     {
         count++;
@@ -100,6 +108,7 @@ public class CombatController : MonoBehaviour
 
     public void swordPulled()
     {
+        isAttackAvail=true;
         swordPull=true;
     }
 
@@ -137,6 +146,8 @@ public class CombatController : MonoBehaviour
             }
         }
     }
+
+    
 
   
 }

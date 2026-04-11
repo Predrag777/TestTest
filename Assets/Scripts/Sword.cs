@@ -27,9 +27,12 @@ public class Sword : MonoBehaviour
                 return;
             }
             Debug.Log("MAC ME JE POGODIO "+other.gameObject.GetComponent<PlayerStats>().healthUI);
-            other.gameObject.GetComponent<PlayerStats>().takeDamage();
+            other.gameObject.GetComponent<Movement>().animator.SetTrigger("hit");
             if(other.gameObject.GetComponent<PlayerStats>().health<=0)
                 other.gameObject.GetComponent<PlayerStats>().lost=true;
+            /*other.gameObject.GetComponent<PlayerStats>().takeDamage();
+            if(other.gameObject.GetComponent<PlayerStats>().health<=0)
+                other.gameObject.GetComponent<PlayerStats>().lost=true;*/
         }
     }
 }

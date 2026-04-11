@@ -1756,37 +1756,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &74575448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74575436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 2
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 1253884677}
-  point2: {fileID: 0}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!4 &74575453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
@@ -1814,6 +1783,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &74575459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74575436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 2
+  health: 8
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1 &75195780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,6 +4500,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1907085594}
+    - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1907085598}
   m_SourcePrefab: {fileID: 100100000, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
 --- !u!1 &201579803 stripped
 GameObject:
@@ -8417,37 +8416,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
   m_PrefabInstance: {fileID: 2732051049243514055}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &384330912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384330906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 3
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 0}
-  point2: {fileID: 0}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!82 &384330917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8572,6 +8540,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &384330926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384330906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 10
+  health: 10
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1001 &389148388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8939,13 +8934,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1059829083}
-    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1059829082}
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1059829087}
+    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1059829091}
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
 --- !u!1 &397565661 stripped
 GameObject:
@@ -10627,37 +10622,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &485065221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485065219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 3
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 2043902587}
-  point2: {fileID: 495431872}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!82 &485065226
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10782,6 +10746,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &485065235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485065219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 10
+  health: 10
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1 &495431872
 GameObject:
   m_ObjectHideFlags: 0
@@ -11531,6 +11522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!1 &524062851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 178811535428721102, guid: f8c0297a8d99e2747baeb5697c8ecb66, type: 3}
@@ -13652,37 +13644,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
   m_PrefabInstance: {fileID: 1318038939}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &617061343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617061341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 2
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 1109376556}
-  point2: {fileID: 1237407973}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!82 &617061344
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13802,6 +13763,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &617061354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617061341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 2
+  health: 8
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1 &621445163
 GameObject:
   m_ObjectHideFlags: 0
@@ -15868,6 +15856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!1001 &721633560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19112,6 +19101,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5f8b64d68291bdfe19f629bf56da4553, type: 3}
   - {fileID: 8300000, guid: a2a3d8d6aec78aa598a7a223ce6c582a, type: 3}
   selectedWeapons: 0
+  dodgeSpeed: 8
 --- !u!136 &943990133
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20685,6 +20675,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1699971453}
+    - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1699971457}
   m_SourcePrefab: {fileID: 100100000, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
 --- !u!1 &1006398872 stripped
 GameObject:
@@ -20848,6 +20841,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 8300000, guid: ffffaf9d8e46bb23d9396b6cd9dbf30e, type: 3}
+--- !u!82 &1012784047
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012784039}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1014913941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21476,37 +21567,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1059829083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059829080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 3
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 0}
-  point2: {fileID: 0}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 55f727bde9ba659ccad4bd2a0b1275ab, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!195 &1059829087
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -21529,6 +21589,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1059829091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059829080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 10
+  health: 10
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!4 &1060800540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8378305016021551963, guid: e7a79a14190d3d34f93236ba7164d734, type: 3}
@@ -23125,6 +23212,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1270984114}
+    - targetCorrespondingSourceObject: {fileID: 8962651653068146437, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1270984119}
   m_SourcePrefab: {fileID: 100100000, guid: 01565f806a66d2c56a5d9b6e563e4cfb, type: 3}
 --- !u!4 &1123281492 stripped
 Transform:
@@ -25399,7 +25489,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270984106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
   m_Name: 
@@ -25542,6 +25632,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1270984119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270984106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 0
+  health: 3
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1 &1271326002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
@@ -26108,6 +26225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!1001 &1318038939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26376,10 +26494,10 @@ PrefabInstance:
       addedObject: {fileID: 617061344}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 617061343}
+      addedObject: {fileID: 617061349}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 617061349}
+      addedObject: {fileID: 617061354}
   m_SourcePrefab: {fileID: 100100000, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
 --- !u!1001 &1318639358
 PrefabInstance:
@@ -26667,9 +26785,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 485065221}
-    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 485065220}
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
@@ -26677,6 +26792,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 485065231}
+    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 485065235}
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
 --- !u!1 &1335749686 stripped
 GameObject:
@@ -27016,15 +27134,16 @@ MonoBehaviour:
   viewAngle: 60
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   playerMask:
     serializedVersion: 2
     m_Bits: 8
+  enemyVisionLevel: 1
   health: 3
   hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
-  death: {fileID: 8300000, guid: 6f4f8188b95bf36b787ee1b5ac23ea51, type: 3}
-  keepDistance: 2
-  attackCooldown: 1.5
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2.2
+  attackCooldown: 2
   isDanger: 0
 --- !u!1001 &1351773136
 PrefabInstance:
@@ -30590,6 +30709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!1 &1545371114 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8644115839786080152, guid: 4963b55652180e946b10fda98efef25e, type: 3}
@@ -33257,6 +33377,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 8300000, guid: ffffaf9d8e46bb23d9396b6cd9dbf30e, type: 3}
+--- !u!82 &1699971457
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699971450}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1701155868 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1159351990771520630, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
@@ -35302,10 +35520,11 @@ MonoBehaviour:
   viewAngle: 60
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   playerMask:
     serializedVersion: 2
     m_Bits: 0
+  enemyVisionLevel: 0
   health: 3
   hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
   death: {fileID: 8300000, guid: 6f4f8188b95bf36b787ee1b5ac23ea51, type: 3}
@@ -35945,10 +36164,10 @@ PrefabInstance:
       addedObject: {fileID: 74575442}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 74575448}
+      addedObject: {fileID: 74575454}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 74575454}
+      addedObject: {fileID: 74575459}
   m_SourcePrefab: {fileID: 100100000, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
 --- !u!4 &1835594245 stripped
 Transform:
@@ -36205,6 +36424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!4 &1848045419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 832199960881189912, guid: 7dd03d73abbd664469543d4489c76922, type: 3}
@@ -36749,6 +36969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 8300000, guid: ffffaf9d8e46bb23d9396b6cd9dbf30e, type: 3}
 --- !u!65 &1907085595
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36770,6 +36991,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.24307293, y: 1.1091774, z: 0.062107235}
   m_Center: {x: 0.00021640881, y: 0.43322983, z: -0.0000019687948}
+--- !u!82 &1907085598
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672293412}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1908529820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38298,37 +38616,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1976454858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976454846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef4f6e6c2ba2b4bea58abb85854db6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyVisionLevel: 2
-  walkSpeed: 2
-  sprintSpeed: 5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 320
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  viewAngle: 60
-  viewDistance: 10
-  point1: {fileID: 67855082}
-  point2: {fileID: 0}
-  animator: {fileID: 0}
-  audios:
-  - {fileID: 8300000, guid: 16cefdd28f5dc7993afd40c6da07f2ef, type: 3}
-  - {fileID: 8300000, guid: c1be30af046348a5e99b03bae03b3306, type: 3}
-  sayStop: 0
-  isAttacking: 1
 --- !u!4 &1976454863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
@@ -38356,6 +38643,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1976454869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976454846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c86ca1ba0ed62f41ae0d40af89f445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistance: 20
+  viewAngle: 60
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 320
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  enemyVisionLevel: 2
+  health: 8
+  hitSound: {fileID: 8300000, guid: cd2bb61873f28babfa451b93693db0fb, type: 3}
+  death: {fileID: 8300000, guid: 0a2065832df6369359643ef5876e87b0, type: 3}
+  keepDistance: 2
+  attackCooldown: 1.5
+  isDanger: 0
 --- !u!1001 &1981257481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38688,6 +39002,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1012784043}
+    - targetCorrespondingSourceObject: {fileID: 8024583501847441683, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1012784047}
   m_SourcePrefab: {fileID: 100100000, guid: 9891eec797d45634dbf057ab61a81d15, type: 3}
 --- !u!1 &1995846948 stripped
 GameObject:
@@ -39200,6 +39517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c832d8c8ea4b86c47bc7ded091fc9e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordClash: {fileID: 0}
 --- !u!1001 &2029908413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41126,13 +41444,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 384330912}
-    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 384330917}
     - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 384330922}
+    - targetCorrespondingSourceObject: {fileID: 2889594357584710800, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 384330926}
   m_SourcePrefab: {fileID: 100100000, guid: 5211a2a834475e958bf4720afd5af6b6, type: 3}
 --- !u!1001 &7025505401018514303
 PrefabInstance:
@@ -41248,7 +41566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5892124
+      value: -4.713829
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41256,11 +41574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.333
+      value: 8.57164
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7811001
+      value: -0.5319644
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalRotation.x
@@ -41268,7 +41586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6244058
+      value: 0.8467667
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalRotation.z
@@ -41280,7 +41598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 282.723
+      value: 244.27701
       objectReference: {fileID: 0}
     - target: {fileID: 2713263874313078401, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -41402,10 +41720,10 @@ PrefabInstance:
       addedObject: {fileID: 1976454852}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1976454858}
+      addedObject: {fileID: 1976454864}
     - targetCorrespondingSourceObject: {fileID: 3381257408786766907, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1976454864}
+      addedObject: {fileID: 1976454869}
   m_SourcePrefab: {fileID: 100100000, guid: c772df155b947e6d296dfae9bad66a67, type: 3}
 --- !u!1001 &7070730009073537020
 PrefabInstance:

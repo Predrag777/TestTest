@@ -5,14 +5,18 @@ public class MaskProp : MonoBehaviour
     public int weight = 10;
     public GameObject[] weapons;
     int selectedWeapons = 0;
+    PlayerStats stats;
 
     Movement movement;
     CombatController combatController;
 
     [SerializeField] ParticleSystem trail;
     [SerializeField] ParticleSystem sparks;
+
+    bool isHurtable=true;
     void Start()
     {
+        stats=GetComponentInParent<PlayerStats>();
         movement = GetComponentInParent<Movement>();
         combatController = GetComponentInParent<CombatController>();
 
@@ -78,5 +82,30 @@ public class MaskProp : MonoBehaviour
     public void swordNotDanger()
     {
         combatController.swordDanger=false;
+    }
+
+    public void hurt()
+    {
+        if(!isHurtable) return;
+
+        isHurtable=false;
+        Debug.Log("HIT aktiviran kod mog igraca");
+        stats.takeDamage();
+    }
+
+    public void hurtReset(){
+        isHurtable=true;
+    }
+
+    public void finishAttack(){//
+        combatController.isAttackAvail=true;
+    }
+
+    void lockAttacking(){
+        combatController.isAttackAvail=true;
+    }
+
+    void unlockAttacking(){
+        combatController.isAttackAvail=true;
     }
 }
