@@ -91,7 +91,7 @@ public class Movement : MonoBehaviour
         //}
 
         ///////////////////DODGES
-        if ( !isDodging)//combatController.enemy != null && 
+        if (combatController.enemy != null && !isDodging)//
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
