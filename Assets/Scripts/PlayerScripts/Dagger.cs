@@ -26,7 +26,9 @@ public class Dagger : MonoBehaviour
         {
             source.PlayOneShot(stabb);
             blood.Play();
-            if (player.enemyAimed != null)
+            other.GetComponent<EnemyCombat>().deathPlay();
+
+            /*if (player.enemyAimed != null)
             {
                 if(!player.enemyAimed.name.Contains("Arthur")){
                     player.enemyAimed.GetComponent<Enemy>().animator.SetTrigger("death2");
@@ -38,7 +40,7 @@ public class Dagger : MonoBehaviour
                 else if(player.enemyAimed.name.Contains("knight")) changeMask.increaseKnights();
                 else if(player.enemyAimed.name.Contains("soldier")) changeMask.increaseSoldiers();
                 
-            }
+            }*/
             
         }
     }

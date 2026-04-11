@@ -7,6 +7,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] float viewAngle=60f;
     [SerializeField] LayerMask obstacleMask;
     [SerializeField] LayerMask playerMask;
+    [SerializeField] public int enemyVisionLevel;
     Animator animator;//
     public int health=3;
     AudioSource source;
@@ -23,6 +24,7 @@ public class EnemyCombat : MonoBehaviour
 
     public bool isDanger=false;
     CombatController myController;
+    PlayerStats playerStats;
 
     bool isDead=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,6 +37,7 @@ public class EnemyCombat : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
 
         myController=playerObj.GetComponent<CombatController>();
+        playerStats=playerObj.GetComponent<PlayerStats>();
 
         if(playerObj != null)
             player = playerObj.transform;
@@ -62,7 +65,26 @@ public class EnemyCombat : MonoBehaviour
                 animator.SetFloat("speed", 0f);
                 return;
             }
+
+            // Provjera ranga maske - ako je igraceva maska viseg ranga, ignorisi ga
+            if(playerStats != null && playerStats.visibilityLevel > enemyVisionLevel)
+            {
+                if(agent.enabled) agent.ResetPath();
+                animator.SetFloat("speed", 0f);
+                return;
+            }
+
             hasSeenPlayer = true;
+        }
+
+        // Ako igrac promijeni masku na visi rang, prestani ga pratiti
+        if(playerStats != null && playerStats.visibilityLevel > enemyVisionLevel)
+        {
+            hasSeenPlayer = false;
+            if(agent.enabled) agent.ResetPath();
+            animator.SetFloat("speed", 0f);
+            myController.enemy = null;
+            return;
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
@@ -122,6 +144,13 @@ public class EnemyCombat : MonoBehaviour
                 animator.SetTrigger("death2");
             }
         }
+    }
+
+    public void deathPlay(){
+        isDead=true;
+        health=-2;
+        source.PlayOneShot(death);
+        animator.SetTrigger("death2");
     }
 
     public void swordDanger()
