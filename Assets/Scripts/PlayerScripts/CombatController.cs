@@ -40,33 +40,34 @@ public class CombatController : MonoBehaviour
 
         myCollider=GetComponent<CapsuleCollider>();
     }
-    int c=1;
     // Update is called once per frame
     void Update()
     {
-        if(currMove.selectedWeapons!=1) return;
+        if(currMove.selectedWeapons!=1) {
+            if(swordPull){
+                Debug.Log("Vrati MAC");
+                source.PlayOneShot(swordReturn);
+                currMove.animator.SetTrigger("return");
+                swordPull=false;
+            }
+            currMove.animator.SetBool("swordActive", swordPull);
+            return;
+        }
 
         currMove.animator.SetBool("swordActive", swordPull);
 
-        if (Input.GetKeyDown(KeyCode.J)) //Activate block
-        {
-            c++; 
-        }
-        
+        // Blok - drzi desni klik
         blockControl();
 
         if (!swordPull && Input.GetMouseButtonDown(0))
         {
-            //Debug.Log("SWORD ACTIVE "+swordPull);
-            //swordObj.SetActive(true);
             source.PlayOneShot(swordDraw);
             currMove.animator.SetTrigger("pull");
         }
 
         if(swordPull && Input.GetMouseButtonDown(0) && isAttackAvail)
         {
-            source.PlayOneShot(swing2);
-            // Debug.Log("COUNT=>   "+count);
+            source.PlayOneShot(swing2);//
             currMove.animator.SetTrigger(("slash"+count));
             count++;
             if(count>3)
@@ -76,27 +77,13 @@ public class CombatController : MonoBehaviour
 
         }
 
-
-
-
-        if(swordPull && Input.GetMouseButtonDown(1))
+        // Vracanje maca u korice na J
+        if(swordPull && (Input.GetKeyDown(KeyCode.J)))
         {
             source.PlayOneShot(swordReturn);
             currMove.animator.SetTrigger("return");
             swordPull=false;
         }
-        
-
-        /*if(!swordPull && Input.GetMouseButtonDown(0))
-        {
-            swordPull=true;
-            currMove.animator.SetTrigger("pull");
-        }
-        if(swordPull && Input.GetMouseButtonDown(1))
-        {
-            swordPull=false;
-            currMove.animator.SetTrigger("return");
-        }*/
     }
 
     public void stopAttack()
@@ -119,16 +106,13 @@ public class CombatController : MonoBehaviour
 
     void blockControl()
     {
-        currMove.animator.SetBool("block", (c%2==0));
-        if (c % 2 == 0)
-        {
-            isBlock=true;
-        }
-        else
-        {
-            isBlock=false;
-        }
-
+        bool holding = Input.GetMouseButton(1);
+        currMove.animator.SetBool("block", holding);
+        isBlock = holding;
+        if(holding)
+            isAttackAvail=false;
+        else if(Input.GetMouseButtonUp(1))
+            isAttackAvail=true;
     }
 
     void LateUpdate()
