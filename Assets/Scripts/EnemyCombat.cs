@@ -23,6 +23,13 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] float keepDistance = 2f;
     [SerializeField] float attackCooldown = 1.5f;
 
+
+    [Header("Patrol")]
+    [SerializeField] bool isPatrol=false;
+    [SerializeField] Transform pos1;
+    [SerializeField] Transform pos2;
+    bool goingToPos2 = true;
+
     bool isAttacking = false;
     bool hasSeenPlayer = false;
 
@@ -66,16 +73,26 @@ public class EnemyCombat : MonoBehaviour
         {
             if(!CanSeePlayer(player))
             {
-                if(agent.enabled) agent.ResetPath();
-                animator.SetFloat("speed", 0f);
+                if(isPatrol)
+                    makePatrol();
+                else
+                {
+                    if(agent.enabled) agent.ResetPath();
+                    animator.SetFloat("speed", 0f);
+                }
                 return;
             }
 
             // Provjera ranga maske - ako je igraceva maska viseg ranga, ignorisi ga
             if(playerStats != null && playerStats.visibilityLevel > enemyVisionLevel)
             {
-                if(agent.enabled) agent.ResetPath();
-                animator.SetFloat("speed", 0f);
+                if(isPatrol)
+                    makePatrol();
+                else
+                {
+                    if(agent.enabled) agent.ResetPath();
+                    animator.SetFloat("speed", 0f);
+                }
                 return;
             }
 
@@ -86,8 +103,13 @@ public class EnemyCombat : MonoBehaviour
         if(playerStats != null && playerStats.visibilityLevel > enemyVisionLevel)
         {
             hasSeenPlayer = false;
-            if(agent.enabled) agent.ResetPath();
-            animator.SetFloat("speed", 0f);
+            if(isPatrol)
+                makePatrol();
+            else
+            {
+                if(agent.enabled) agent.ResetPath();
+                animator.SetFloat("speed", 0f);
+            }
             myController.enemy = null;
             return;
         }
@@ -230,6 +252,21 @@ public class EnemyCombat : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    void makePatrol(){
+        if(pos1 == null || pos2 == null) return;
+
+        Transform target = goingToPos2 ? pos2 : pos1;
+        agent.isStopped = false;
+        agent.SetDestination(target.position);
+        animator.SetFloat("speed", agent.velocity.magnitude);
+
+        if(!agent.pathPending && agent.remainingDistance < 0.5f)
+        {
+            goingToPos2 = !goingToPos2;
+        }
     }
 
     void resetAttack()
