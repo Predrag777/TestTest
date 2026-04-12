@@ -22,7 +22,7 @@ public class Dagger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log("Udario u "+other.gameObject.tag);
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !other.gameObject.GetComponent<EnemyCombat>().isDead)
         {
             source.PlayOneShot(stabb);
             blood.Play();

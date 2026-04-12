@@ -30,7 +30,7 @@ public class EnemyCombat : MonoBehaviour
     CombatController myController;
     PlayerStats playerStats;
 
-    bool isDead=false;
+    public bool isDead=false;
     bool isHitCooldown=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

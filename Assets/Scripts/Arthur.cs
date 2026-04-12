@@ -25,11 +25,18 @@ public class Arthur : MonoBehaviour
         {
             animator.SetTrigger("death2");
             isDead=true;
-            endGame.SetActive(true);
+            
 
             if(playerStats != null)
                 playerStats.isArthurDead = true;
+
+            Invoke("showEndGame", 2f);
         }
+    }
+
+    void showEndGame()
+    {
+        endGame.SetActive(true);
     }
 
 }
