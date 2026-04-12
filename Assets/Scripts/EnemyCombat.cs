@@ -14,6 +14,7 @@ public class EnemyCombat : MonoBehaviour
 
     Animator animator;//
     public int health=3;
+    int maxHealth;
     AudioSource source;
     NavMeshAgent agent;
     Transform player;
@@ -29,6 +30,10 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] Transform pos1;
     [SerializeField] Transform pos2;
     bool goingToPos2 = true;
+    bool isTurning = false;
+    float turnSpeed = 3f;
+    [SerializeField] float patrolSpeed = 2f;
+    float originalSpeed;
 
     bool isAttacking = false;
     bool hasSeenPlayer = false;
@@ -39,6 +44,7 @@ public class EnemyCombat : MonoBehaviour
 
     public bool isDead=false;
     bool isHitCooldown=false;
+    public bool isFightingMode=false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,6 +59,9 @@ public class EnemyCombat : MonoBehaviour
 
         if(playerObj != null)
             player = playerObj.transform;
+
+        maxHealth=health;
+        originalSpeed=agent.speed;
     }
 
     // Update is called once per frame
@@ -66,7 +75,7 @@ public class EnemyCombat : MonoBehaviour
             return;
         }
 
-        animator.SetBool("swordActive", true);
+        animator.SetBool("swordActive", isFightingMode);
 
         // Provjera vizije - jednom kad vidi igraca, prati ga zauvijek
         if(!hasSeenPlayer)
@@ -97,12 +106,15 @@ public class EnemyCombat : MonoBehaviour
             }
 
             hasSeenPlayer = true;
+            isFightingMode = true;
+            agent.speed = originalSpeed;
         }
 
         // Ako igrac promijeni masku na visi rang, prestani ga pratiti
         if(playerStats != null && playerStats.visibilityLevel > enemyVisionLevel)
         {
             hasSeenPlayer = false;
+            isFightingMode = false;
             if(isPatrol)
                 makePatrol();
             else
@@ -202,7 +214,7 @@ public class EnemyCombat : MonoBehaviour
         Debug.Log("HURT ACTIV");
         health--;
         if(health>0)
-            healthUI.fillAmount = (float)health / 3f;
+            healthUI.fillAmount = (float)health / maxHealth;
         else
             healthUI.fillAmount=0f;
     }
@@ -259,6 +271,34 @@ public class EnemyCombat : MonoBehaviour
         if(pos1 == null || pos2 == null) return;
 
         Transform target = goingToPos2 ? pos2 : pos1;
+
+        if(isTurning)
+        {
+            // Stoji i okrece se ka novom cilju
+            agent.isStopped = true;
+            animator.SetFloat("speed", 0f);
+
+            Vector3 dir = (target.position - transform.position);
+            dir.y = 0f;
+            if(dir.sqrMagnitude > 0.01f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * turnSpeed);
+
+                // Kada je dovoljno okrenut, nastavi hodati
+                if(Quaternion.Angle(transform.rotation, targetRot) < 5f)
+                {
+                    isTurning = false;
+                }
+            }
+            else
+            {
+                isTurning = false;
+            }
+            return;
+        }
+
+        agent.speed = patrolSpeed;
         agent.isStopped = false;
         agent.SetDestination(target.position);
         animator.SetFloat("speed", agent.velocity.magnitude);
@@ -266,6 +306,7 @@ public class EnemyCombat : MonoBehaviour
         if(!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             goingToPos2 = !goingToPos2;
+            isTurning = true;
         }
     }
 
