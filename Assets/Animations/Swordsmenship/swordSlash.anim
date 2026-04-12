@@ -45089,7 +45089,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.0333333
+  - time: 1
     functionName: turnOff
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -45098,6 +45098,13 @@ AnimationClip:
     messageOptions: 0
   - time: 1.0333333
     functionName: swordNotDanger
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: finishAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

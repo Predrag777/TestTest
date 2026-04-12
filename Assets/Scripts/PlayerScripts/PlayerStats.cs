@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
         if (lost && !isdead)
         {
             isdead=true;
-            movement.animator.SetTrigger("death");
+            movement.animator.SetTrigger("death2");
         }
         if(isArthurDead)
         {
@@ -43,7 +43,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (hit.rigidbody != null && hit.rigidbody.CompareTag("Enemy"))
         {
-            Debug.Log("Igrač je udaren od neprijatelja!");
+            // Debug.Log("Igrač je udaren od neprijatelja!");
         }
     }
 
@@ -51,7 +51,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(healthUI==null) return;
 
-        Debug.Log("Izgubio healthe");
+        // Debug.Log("Izgubio healthe");
         health-=10;
         healthUI.fillAmount=health/100f;
     }

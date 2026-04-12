@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
 
         if (CanSeePlayer(player.transform))
         {
-            Debug.Log("Ugledan");
+            // Debug.Log("Ugledan");
             targetPlayer = player.transform;
         }
         else
@@ -89,12 +89,12 @@ public class EnemyController : MonoBehaviour
         
         if (anw != null && anw.answer!=null && anw.answer.Length>0)
         {
-            Debug.Log("Anser   "+anw.answer);
+            // Debug.Log("Anser   "+anw.answer);
             string ans = anw.answer.ToLower();
 
             if (ans.Contains("guard") || ans.Contains("long live to king") || ans.Contains("kings soldier"))
             {
-                Debug.Log("Dobar odgovor! ");
+                // Debug.Log("Dobar odgovor! ");
                 source.PlayOneShot(audios[3]);
                 this.enabled=false;
             }
@@ -141,7 +141,7 @@ public class EnemyController : MonoBehaviour
             anw = answers;
 
             int visibility = playerStats.visibilityLevel;
-            Debug.Log("Pronađen igrač! Visibility: " + visibility);
+            // Debug.Log("Pronađen igrač! Visibility: " + visibility);
 
             if (visibility <= enemyVisionLevel)
             {
@@ -201,12 +201,12 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
+                // Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
                 return true;
             }
             else
             {
-                Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
+                // Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
                 return false;
             }
         }

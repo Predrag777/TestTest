@@ -21,7 +21,7 @@ public class Dagger : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Udario u "+other.gameObject.tag);
+        // Debug.Log("Udario u "+other.gameObject.tag);
         if (other.gameObject.CompareTag("Enemy"))
         {
             source.PlayOneShot(stabb);

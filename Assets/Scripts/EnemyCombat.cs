@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyCombat : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] LayerMask obstacleMask;
     [SerializeField] LayerMask playerMask;
     [SerializeField] public int enemyVisionLevel;
+
+    [SerializeField] Image healthUI;
+
     Animator animator;//
     public int health=3;
     AudioSource source;
@@ -131,10 +135,10 @@ public class EnemyCombat : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("katana") && !isHitCooldown)
+        if (collider.CompareTag("katana") && !isHitCooldown && !isDead)
         {
             isHitCooldown=true;
-            Debug.Log("Pogodjen je sa "+collider.tag);
+            // Debug.Log("Pogodjen je sa "+collider.tag);
             if(health>1){
                 source.PlayOneShot(hitSound);
                 animator.SetTrigger("hit");
@@ -143,6 +147,7 @@ public class EnemyCombat : MonoBehaviour
                 health=-2;
                 source.PlayOneShot(death);
                 animator.SetTrigger("death2");
+                healthUI.fillAmount=0f;
             }
             Invoke("hurtReset",0.5f);//
         }
@@ -158,6 +163,7 @@ public class EnemyCombat : MonoBehaviour
         health=-2;
         source.PlayOneShot(death);
         animator.SetTrigger("death2");
+        healthUI.fillAmount=0f;
     }
 
     public void swordDanger()
@@ -173,6 +179,10 @@ public class EnemyCombat : MonoBehaviour
     {
         Debug.Log("HURT ACTIV");
         health--;
+        if(health>0)
+            healthUI.fillAmount = (float)health / 3f;
+        else
+            healthUI.fillAmount=0f;
     }
 
     void ResetAttack()
@@ -182,7 +192,7 @@ public class EnemyCombat : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Sudario sam se sa: " + collision.gameObject.name);
+        // Debug.Log("Sudario sam se sa: " + collision.gameObject.name);
     }
 
     bool CanSeePlayer(Transform playerTarget)
@@ -209,12 +219,12 @@ public class EnemyCombat : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
-                Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
+                // Debug.DrawRay(origin, directionToPlayer * distance, Color.green);
                 return true;
             }
             else
             {
-                Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
+                // Debug.DrawRay(origin, directionToPlayer * distance, Color.red);
                 return false;
             }
         }

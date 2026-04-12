@@ -23,6 +23,13 @@ public class CameraFollow : MonoBehaviour
     {
         if(target != null)
             combatController = target.GetComponent<CombatController>();
+
+        Camera cam = GetComponent<Camera>();
+        if(cam != null)
+        {
+            cam.farClipPlane = 150f;
+            cam.useOcclusionCulling = true;
+        }
     }
 
     void LateUpdate()
@@ -77,7 +84,7 @@ public class CameraFollow : MonoBehaviour
             collisionMask             // layer-i koji blokiraju
         ))
         {
-            Debug.DrawRay(target.position, direction * distance, Color.red);
+            // Debug.DrawRay(target.position, direction * distance, Color.red);
             float hitDistance = Mathf.Clamp(hit.distance, minDistance, distance);
             desiredPosition = target.position + direction * hitDistance;
         }

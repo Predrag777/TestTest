@@ -151,7 +151,7 @@ void Patrol()
                 if(hit.collider.GetComponent<Movement>().isRolling) return false;
                 if (hit.collider.GetComponent<PlayerStats>().visibilityLevel <= enemyVisionLevel)
                 {
-                    Debug.Log("UHVACEN SI");
+                    // Debug.Log("UHVACEN SI");
                     if (!sayStop)
                     {
                         sayStop=true;
@@ -195,7 +195,7 @@ void Patrol()
         {
             if (hit.CompareTag("Player"))
             {
-                Debug.Log("Nanisanjen");
+                // Debug.Log("Nanisanjen");
                 return hit.gameObject;
             }
         }
