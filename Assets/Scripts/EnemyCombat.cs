@@ -268,7 +268,7 @@ public class EnemyCombat : MonoBehaviour
 
 
     void makePatrol(){
-        if(pos1 == null || pos2 == null) return;
+        if(pos1 == null || pos2 == null || health<=0) return;
 
         Transform target = goingToPos2 ? pos2 : pos1;
 
