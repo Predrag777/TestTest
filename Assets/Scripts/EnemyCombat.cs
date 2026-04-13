@@ -169,6 +169,7 @@ public class EnemyCombat : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        if(health<=0 || isDead) return;
         if (collider.CompareTag("katana") && !isHitCooldown && !isDead)
         {
             isHitCooldown=true;

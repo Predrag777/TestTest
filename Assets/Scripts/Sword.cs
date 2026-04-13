@@ -17,7 +17,7 @@ public class Sword : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && enemyCombat.isDanger)
+        if (other.gameObject.CompareTag("Player") && enemyCombat.isDanger && enemyCombat.health>0)
         {
             
             if(other.gameObject.GetComponent<CombatController>().isBlock){
