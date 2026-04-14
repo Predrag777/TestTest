@@ -171,6 +171,7 @@ public class Movement : MonoBehaviour
     public void SS()
     {
         isAttacking=false;
+        
     }
 
     void ResetDodge()

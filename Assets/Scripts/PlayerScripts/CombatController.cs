@@ -56,7 +56,6 @@ public class CombatController : MonoBehaviour
 
         currMove.animator.SetBool("swordActive", swordPull);
 
-        // Blok - drzi desni klik
         blockControl();
 
         if (!swordPull && Input.GetMouseButtonDown(0))
@@ -68,6 +67,7 @@ public class CombatController : MonoBehaviour
         if(swordPull && Input.GetMouseButtonDown(0) && isAttackAvail)
         {
             source.PlayOneShot(swing2);//
+            //count=3;
             currMove.animator.SetTrigger(("slash"+count));
             count++;
             if(count>3)
@@ -77,7 +77,6 @@ public class CombatController : MonoBehaviour
 
         }
 
-        // Vracanje maca u korice na J
         if(swordPull && (Input.GetKeyDown(KeyCode.J)))
         {
             source.PlayOneShot(swordReturn);
